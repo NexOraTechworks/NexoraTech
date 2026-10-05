@@ -1,15 +1,18 @@
 export function Navbar(){
     return(
         <nav className=" fixed top-5    flex justify-around  border border-line bg-back  left-1/2 -translate-x-1/2   w-[92%] max-w-4xl rounded-3xl py-3 items-center backdrop-blur-xl         " >
+           <a href="#hero">
             <h1 className=" font-jakarta font-bold  " >  
                 Nexora tech
             </h1>
+
+           </a>
             <div className=" flex justify-between gap-4  items-center space-x-1 font-mon text-xs   " >
             <a href="" className="  text-muted  hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white" >Overview</a>
             <a href="" className="  text-muted   hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white" >Works</a>
             <a href="" className="  text-muted   hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white " >Career</a>
             <a href="" className="  text-muted  hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white" >Stack</a>
-            <a href="" className="  text-muted   hover:bg-white/5 py-1.5 px-3.5 rounded-2xl transition-colors hover:text-white" >Contact</a>
+            <a href="#contact" className="  text-muted   hover:bg-white/5 py-1.5 px-3.5 rounded-2xl transition-colors hover:text-white" >Contact</a>
 
             </div>
 
@@ -23,7 +26,3 @@ export function Navbar(){
         </nav>
     )
 }
-// class="fixed top-5 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-4x
-
-// class="px-3.5 py-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
-// hidden md:flex items-center space-x-1 font-mono text-xs
