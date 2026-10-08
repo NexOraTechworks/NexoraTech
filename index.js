@@ -4,6 +4,10 @@ const app = express();
 
 app.use(express.json());
 
+const profileInquiryRoutes = require('./src/routes/profile_inquiry_routes');
+
+app.use("/", profileInquiryRoutes);
+
 dbConnect()
 .then(() => {
     console.log('Database connected successfully');
