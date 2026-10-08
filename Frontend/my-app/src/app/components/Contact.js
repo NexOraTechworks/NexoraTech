@@ -1,11 +1,18 @@
 'use client';
 import { useForm } from "react-hook-form";
+import { PopUp } from "./PopUp";
+import { useState } from "react";
 
 
 // Funtion which sends data(Username and Email) from the potential client
 export function Contact(){
     const {register,handleSubmit,reset} = useForm()
+    const [alert,setAlert]= useState(false)
     const sendData =(data)=>{
+        setAlert(true)
+      setTimeout(()=>{
+        setAlert(false)
+      },1000)  
       console.log(data)
       reset()
      
@@ -54,6 +61,7 @@ export function Contact(){
                             Dispatch Transmission
                         </span >
                     </button>
+                    <PopUp show={alert} text={"Sent Successfully!"} />
                 </form>
 
             </div>
