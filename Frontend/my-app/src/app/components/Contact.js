@@ -10,23 +10,23 @@ export function Contact(){
     const {register,handleSubmit,reset} = useForm()
     const [alert,setAlert]= useState(false)
     const sendData =async (data)=>{
-        // try{
-        //     const respons = await axios.post(
-        //         "http://localhost:7070/inquiry",data)
-        //         setAlert(true)
-        //       setTimeout(()=>{
-        //         setAlert(false)
-        //       },1000)  
-        //       console.log(data)
-        //       reset()
-        // }catch (err){
-        //     console.log(err)
-        // }
-        setAlert(true)
+        try{
+            const respons = await axios.post(
+                process.env.API_URL,data)
+                setAlert(true)
               setTimeout(()=>{
                 setAlert(false)
-              },1000) 
+              },1000)  
+              console.log(data)
               reset()
+        }catch (err){
+            console.log(err)
+        }
+        // setAlert(true)
+        //       setTimeout(()=>{
+        //         setAlert(false)
+        //       },1000) 
+        //       reset()
     }
     return(
         <section id="contact"  className=" py-24  max-w-5xl mx-auto px-4  border-t border-white/5   " >

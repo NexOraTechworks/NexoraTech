@@ -6,7 +6,7 @@ export default function ThemeProvider({children}) {
         <NextThemeProvider
             attribute="class"
             defaultTheme="dark"
-            // enableSystem
+            enableSystem={false}
         >
             { children}
         </NextThemeProvider>
