@@ -11,8 +11,8 @@ export function Contact(){
     const [alert,setAlert]= useState(false)
     const sendData =async (data)=>{
         try{
-            const respons = await axios.post(
-                process.env.API_URL,data)
+            const response = await axios.post(
+                process.env.NEXT_PUBLIC_API_URL,data)
                 setAlert(true)
               setTimeout(()=>{
                 setAlert(false)
