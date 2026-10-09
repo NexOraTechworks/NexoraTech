@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import BackgroundEffects from "./components/BackroundEffects";
 import { Navbar } from "./components/Navbar";
+import ThemeProvider from "./components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,18 +23,21 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
       <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Syne:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
       </head>
 
-      <body className="bg-[#08090C] text-white antialiased overflow-x-hidden bg-noise">
+      <body className=" bg-white transition-colors duration-500 text-white dark:bg-onyx  overflow-x-hidden bg-noise">
+        <ThemeProvider>
         <BackgroundEffects/>
         <main className="relative z-10">
           <Navbar/>
           {children}
         </main>
+        </ThemeProvider>
         </body>
     </html>
   );

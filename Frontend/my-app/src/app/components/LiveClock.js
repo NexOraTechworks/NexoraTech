@@ -23,9 +23,9 @@ export function LiveClock (){
                 return ()=>clearInterval(interval)
     },[])
   return(
-    <div className="px-3 py-1 rounded-full glass-bento text-xs font-mono text-slate-400 flex items-center space-x-2 mb-8">
+    <div className="px-3 py-1 rounded-full glass-bento text-xs font-mono text-charcoal dark:text-slate-400 flex items-center space-x-2 mb-8">
         <span>IST:</span>
-<span id="live-ist-clock" className="text-white font-medium">
+<span id="live-ist-clock" className="dark:text-white text-charcoal font-medium">
       {time}
     </span>
     </div>

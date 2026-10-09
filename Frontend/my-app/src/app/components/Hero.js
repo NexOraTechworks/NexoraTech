@@ -10,7 +10,7 @@ export function Hero() {
             <LiveClock />
             <div className=" flex flex-col justify-center items-center " >
 
-                <h1 className="font-mon text-7xl  font-extrabold text-white tracking-tighter leading-[1.05] max-w-5xl mb-8">
+                <h1 className="font-mon text-7xl  font-extrabold dark:text-white text-charcoal  tracking-tighter leading-[1.05] max-w-5xl mb-8">
                     Crafting Scalable Web &
                     Cloud-Native Solutions
                 </h1>

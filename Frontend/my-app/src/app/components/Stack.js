@@ -35,7 +35,7 @@ export function Stack(){
                     <span className="text-emerald-light font-bold tracking-widest uppercase text-xs mb-3 block " >
                     // Technical Depth
                     </span>
-                    <h2 className=" font-bold font-syne leading-12 text-4xl tracking-wide" >
+                    <h2 className=" dark:text-white text-charcoal font-bold font-syne leading-12 text-4xl tracking-wide" >
                     Tech Stack
                     </h2>
                     <div className=" grid grid-cols-3 gap-6 mt-6  " >

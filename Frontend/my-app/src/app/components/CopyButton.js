@@ -20,12 +20,17 @@ export function CopyButton(){
         onClick={copyToClipboard}
         className=" flex justify-center 
         gap-2
-        bg-white/5 backdrop-blur-2xl
-        border border-white/10
+        bg-light
+        dark:bg-white/5 backdrop-blur-2xl
+        border-2 dark:border-white/10
+        border-graphite
         items-center 
         rounded-4xl
-       
-        hover:border-white/20
+        text-charcoal
+        dark:text-white
+        dark:hover:border-white/20
+        hover:shadow-lg
+        transition-all
         px-6 py-3" >
             {copy?<Check color="#34D399" />:
 
