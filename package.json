@@ -20,8 +20,14 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.6",
     "express": "^5.2.1",
     "mongoose": "^9.11.1",
+    "nodemailer": "^10.0.16",
     "validator": "^13.15.35"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
