@@ -9,7 +9,7 @@ export function Navbar(){
            </a>
             <div className=" flex justify-between gap-4  items-center space-x-1 font-mon text-xs   " >
             <a href="" className="  text-muted  hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white" >Overview</a>
-            <a href="" className="  text-muted   hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white" >Works</a>
+            <a href="" className="  text-muted   hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white" >Projects</a>
             <a href="" className="  text-muted   hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white " >Career</a>
             <a href="#stack" className="  text-muted  hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white" >Stack</a>
             <a href="#contact" className="  text-muted   hover:bg-white/5 py-1.5 px-3.5 rounded-2xl transition-colors hover:text-white" >Contact</a>
