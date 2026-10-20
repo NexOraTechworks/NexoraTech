@@ -29,16 +29,16 @@ export function Stack(){
     },
   ];
   return (
-    <section id="stack" className="  border-t py-24 border-white/5 max-w-6xl mx-auto  ">
+    <section id="stack" className="  border-t py-24 border-white/5 max-w-6xl mx-auto px-6  ">
         <div>
         <div className=" mb-5 " >
                     <span className="text-emerald-light font-bold tracking-widest uppercase text-xs mb-3 block " >
                     // Technical Depth
                     </span>
-                    <h2 className=" dark:text-white text-charcoal font-bold font-syne leading-12 text-4xl tracking-wide" >
+                    <h2 className=" dark:text-white text-charcoal font-bold font-syne leading-12 text-2xl md:text-4xl tracking-wide" >
                     Tech Stack
                     </h2>
-                    <div className=" grid grid-cols-3 gap-6 mt-6  " >
+                    <div className=" grid grid-cols-1 md:grid-cols-3 gap-6 mt-6  " >
                        {
                         skills.map((skill)=>{
                           return<Card color={skill.color} title={skill.title} tech={skill.tech} hover={skill.hover} key={skill.mastery} />

@@ -3,7 +3,7 @@ import { SquareText } from "lucide-react"
 export function Card({title,tech,hover,color}){
   return (
     <div>
-        <div className={` dark:bg-transparent bg-light   backdrop-blur-2xl
+        <div className={` dark:bg-transparent bg-light min-w-full  backdrop-blur-2xl
         border dark:border-white/10 border-graphite shadow transition-colors rounded-2xl p-6 ${hover} `} >
     <div className=" mb-4 ">
 

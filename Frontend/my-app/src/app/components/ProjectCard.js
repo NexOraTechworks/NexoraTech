@@ -1,5 +1,5 @@
 import { ChevronRight } from "lucide-react"
-export function ProjectCard({title,description,tools}) {
+export function ProjectCard({title,description,tools,onView}) {
   return (
     <div>
       <div className=" glass-bento  border border-graphite shadow  rounded-2xl p-8 group " >
@@ -18,16 +18,16 @@ export function ProjectCard({title,description,tools}) {
           {description}
         </p>
         <div className=" border-t border-white/10 pt-6 ">
-          <div className=" flex justify-between  " >
+          <div className=" flex md:flex-row flex-col items-center justify-between gap-4 md:gap-0  " >
             <ul className=" flex gap-3 text-xs font-mon text-slate-400  ">
               {
-                tools.map((data)=>
-                  <li>{data}</li>
-                )
+               tools.slice(0,3).map((data,index)=>
+                <li key={index} className="  ">{data}</li>
+              )
               }
             </ul>
-            <button className=" flex items-center gap-2 text-xs font-mon hover:text-emerald transition-all dark:text-white text-charcoal   " >
-              Detailed case
+            <button onClick={onView} className=" w-full justify-center  md:w-max    flex items-center gap-1 text-xs font-mon hover:text-emerald transition-all dark:text-white text-charcoal   " >
+              Detailed case 
               <ChevronRight size="16px" />
             </button>
           </div>

@@ -2,18 +2,18 @@ import ThemeToggle from "./ThemeToggle";
 
 export function Navbar(){
     return(
-        <nav className=" fixed top-5 z-50 flex justify-around  border dark:border-line border-graphite shadow dark:bg-back bg-light   left-1/2 -translate-x-1/2   w-[92%] max-w-4xl rounded-3xl py-3 items-center backdrop-blur-xl         " >
+        <nav className=" fixed top-5 z-50 flex justify-between px-6 md::px-0  lg:justify-around  border dark:border-line border-graphite shadow dark:bg-back bg-light   left-1/2 -translate-x-1/2   w-[92%] max-w-4xl rounded-3xl py-3 items-center backdrop-blur-xl         " >
            <a href="#hero">
             <h1 className=" font-jakarta font-bold dark:text-white text-charcoal   " >  
                 Nexora tech
             </h1>
 
            </a>
-            <div className=" flex justify-between gap-4  items-center space-x-1 font-mon text-xs   " >
-            <a href="" className="  text-muted  hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white" >Overview</a>
-            <a href="#projects" className="  text-muted   hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white" >Projects</a>
-            <a href="#stack" className="  text-muted  hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-white" >Stack</a>
-            <a href="#contact" className="  text-muted   hover:bg-white/5 py-1.5 px-3.5 rounded-2xl transition-colors hover:text-white" >Contact</a>
+            <div className=" hidden md:flex justify-between gap-4    items-center space-x-1 font-mon text-xs   " >
+            <a href="" className="  text-muted hover:text-slate-800  dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl " >Overview</a>
+            <a href="#projects" className="  text-muted   dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-slate-800 " >Projects</a>
+            <a href="#stack" className="  text-muted  dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-slate-800 " >Stack</a>
+            <a href="#contact" className="  text-muted   dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl transition-colors hover:text-slate-800 " >Contact</a>
 
             </div>
             <div className=" flex items-center gap-1.5 ">
