@@ -98,7 +98,7 @@ export default function AdminSignup() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
-      await axios.post("http://localhost:7070/login",formData,{withCredentials:true})
+      await axios.post(process.env.NEXT_PUBLIC_LOGIN_API_URL,formData,{withCredentials:true})
       router.push("/admin")
     }catch(error){
       console.log(error)
@@ -130,7 +130,7 @@ export default function AdminSignup() {
           </div>
 
           <div className="mb-8 dark:text-white text-charcoal">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/15 bg-emerald-400/[0.06] px-3 py-1.5">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/15 bg-emerald-400/6 px-3 py-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-400">
                 Admin Registration

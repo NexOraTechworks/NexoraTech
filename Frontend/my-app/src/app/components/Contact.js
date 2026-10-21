@@ -37,7 +37,7 @@ export function Contact() {
 
         try {
             await axios.post(
-                process.env.NEXT_PUBLIC_API_URL,
+                process.env.NEXT_PUBLIC_INQUIRY_API_URL,
                 data
             );
 

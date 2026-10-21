@@ -18,7 +18,7 @@ export function AdminNav() {
   const logOut = async () => {
     try {
       setLoading(true)
-      await axios.post("http://localhost:7070/logout", {}, { withCredentials: true })
+      await axios.post(process.env.NEXT_PUBLIC_LOGIN_API_URL, {}, { withCredentials: true })
       router.replace("/admin/login");
       router.refresh();
     } catch (error) {

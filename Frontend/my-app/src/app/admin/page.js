@@ -14,7 +14,7 @@ console.log(log)
   
   return (
     <section className=" min-h-screen items-center justify-center overflow-hidden px-4 py-10 text-white ">
-     <h1 className=" text-2xl" >
+     <h1 className=" font-mon text-2xl" >
       Welcome back,Aakash
      </h1>
      <UserList/>

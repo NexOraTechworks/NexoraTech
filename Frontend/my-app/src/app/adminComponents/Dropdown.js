@@ -29,7 +29,7 @@ export default function Dropdown() {
       {isOpen && (
         <div className="absolute right-0 z-50 mt-2 w-full
           overflow-hidden rounded-lg border border-white/10
-          bg-[#12141A] p-1 shadow-xl">
+          bg-surface p-1 shadow-xl">
 
           <button className="flex w-full items-center gap-3
             rounded-md px-3 py-2.5 text-sm text-gray-300
