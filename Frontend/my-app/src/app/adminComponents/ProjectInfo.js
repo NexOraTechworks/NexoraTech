@@ -14,7 +14,7 @@ export function ProjectInfo() {
                         <h2 className=" mb-3 font-mon ">
                           Add New Project 
                         </h2>
-            <div className=" dark:bg-[#051121] w-full max-w-3xl   rounded-lg py-2.5 px-4 " >
+            <div className=" bg-[#051121] w-full max-w-3xl   rounded-lg py-2.5 px-4 " >
                 <form onSubmit={handleSubmit(submitProject)}>
 
                     <div>
@@ -33,7 +33,7 @@ export function ProjectInfo() {
                                     message: "Name must have at least 2 characters"
                                 }
                             })}
-                            className=" w-full mb-3  text-sm placeholder-slate-600 dark:bg-[#051121] bg-light rounded-xl py-3 px-4 border-2 dark:border-white/10 border-graphite"
+                            className=" w-full mb-3  text-sm placeholder-slate-600 bg-[#051121] rounded-xl py-3 px-4 border-2 border-white/10 "
                         />
                         <div className="min-h-5">
                             {errors.title && <ErrorMessage />}
@@ -49,7 +49,7 @@ export function ProjectInfo() {
                             {...register("data", {
                                 required: "This is required"
                             })}
-                            className="w-full mb-3 resize-none px-4 py-3 border-2 dark:border-white/10 border-graphite placeholder-slate-600 text-slate-400 text-xs dark:bg-[#051121] bg-light rounded-xl"
+                            className="w-full mb-3 resize-none px-4 py-3 border-2 border-white/10  placeholder-slate-600 text-slate-400 text-xs bg-[#051121]  rounded-xl"
                             placeholder="Brief outline of architecture needs, timeline, or position overview..."
                         />
                         <div className="min-h-5">
@@ -67,7 +67,7 @@ export function ProjectInfo() {
                             {...register("Details", {
                                 required: "this  is required"
                             })}
-                            className="w-full resize-none px-4 py-3 border-2 dark:border-white/10 border-graphite placeholder-slate-600 text-slate-400 text-xs dark:bg-[#051121] bg-light rounded-xl mb-3"
+                            className="w-full resize-none px-4 py-3 border-2 border-white/10  placeholder-slate-600 text-slate-400 text-xs bg-[#051121]  rounded-xl mb-3"
                             placeholder="Brief outline of architecture needs, timeline, or position overview..."
                         />
                         <div className="min-h-5">
@@ -90,7 +90,7 @@ export function ProjectInfo() {
                                     message: "Name must have at least 2 characters"
                                 }
                             })}
-                            className=" w-full mb-3  text-sm placeholder-slate-600 dark:bg-[#051121] bg-light rounded-xl py-3 px-4 border-2 dark:border-white/10 border-graphite"
+                            className=" w-full mb-3  text-sm placeholder-slate-600 bg-[#051121]  rounded-xl py-3 px-4 border-2 border-white/10 "
                         />
                         <div className="min-h-5">
                             {errors.title && <ErrorMessage />}

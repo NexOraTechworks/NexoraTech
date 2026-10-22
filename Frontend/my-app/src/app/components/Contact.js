@@ -21,13 +21,11 @@ export function Contact() {
     const sendData = async (data) => {
         setError("");
         setAlert(false);
-
-        const messageError = validateMessage(data.message);
+      const messageError = validateMessage(data.message);
 
         if (messageError) {
             setError(messageError);
             setAlert(true);
-
             setTimeout(() => {
                 setAlert(false);
             }, 2000);
@@ -42,14 +40,14 @@ export function Contact() {
             );
 
             // Only reset the form after a successful request
-            reset();
-
+            
             setError("");
             setAlert(true);
-
+            
             setTimeout(() => {
                 setAlert(false);
             }, 2000);
+            reset();
 
         } catch (err) {
             console.error(err);
@@ -101,7 +99,7 @@ export function Contact() {
                                         message: "Name must have at least 2 characters"
                                     }
                                 })}
-                                className="w-full text-sm placeholder-slate-600 dark:bg-onyx bg-light rounded-xl py-3 px-4 border-2 dark:border-white/10 border-graphite"
+                                className="w-full text-sm placeholder-slate-600 dark:bg-onyx bg-light rounded-xl py-3 px-4 border-2 dark:text-white text-charcoal dark:border-white/10 border-graphite"
                             />
 
                             {errors.name && (
@@ -122,7 +120,7 @@ export function Contact() {
                                 {...register("emailId", {
                                     required: "Email is required"
                                 })}
-                                className="w-full text-sm placeholder-slate-600 dark:bg-onyx bg-light rounded-xl py-3 px-4 border-2 dark:border-white/10 border-graphite"
+                                className="w-full text-sm placeholder-slate-600 dark:bg-onyx bg-light rounded-xl py-3 px-4 border-2 dark:text-white text-charcoal dark:border-white/10 border-graphite"
                             />
 
                             {errors.emailId && (
@@ -147,7 +145,7 @@ export function Contact() {
                                         message: "Subject must have at least 2 characters"
                                     }
                                 })}
-                                className="w-full text-sm placeholder-slate-600 dark:bg-onyx bg-light rounded-xl py-3 px-4 border-2 dark:border-white/10 border-graphite"
+                                className="w-full text-sm placeholder-slate-600 dark:bg-onyx bg-light dark:text-white text-charcoal rounded-xl py-3 px-4 border-2 dark:border-white/10 border-graphite"
                             />
 
                             {errors.subject && (
@@ -169,7 +167,7 @@ export function Contact() {
                             {...register("message", {
                                 required: "Requirements are required"
                             })}
-                            className="w-full resize-none px-4 py-3 border-2 dark:border-white/10 border-graphite placeholder-slate-600 text-slate-400 text-xs dark:bg-onyx bg-light rounded-xl"
+                            className="w-full resize-none px-4 py-3 border-2 dark:border-white/10 border-graphite dark:text-white text-charcoal placeholder-slate-600  text-xs dark:bg-onyx bg-light rounded-xl"
                             placeholder="Brief outline of architecture needs, timeline, or position overview..."
                         />
 
@@ -183,7 +181,7 @@ export function Contact() {
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="dark:bg-white bg-charcoal w-full md:w-auto rounded-4xl font-medium text-xs md:text-sm mt-4 px-8 py-3.5 dark:text-black text-light hover:bg-slate-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="dark:bg-white hover:bg-gray-700 bg-charcoal w-full md:w-auto rounded-4xl font-medium text-xs md:text-sm mt-4 px-8 py-3.5 dark:text-black text-light dark:hover:bg-slate-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         <span>
                             {isSubmitting
