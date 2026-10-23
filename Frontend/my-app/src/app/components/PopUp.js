@@ -25,7 +25,7 @@ export function PopUp({ show ,text }) {
                 ${
                     show
                         ? "translate-y-0 opacity-100"
-                        : "-translate-y-[150%] opacity-0"
+                        : "-translate-y-[150%] hidden"
                 }
             `}
         >

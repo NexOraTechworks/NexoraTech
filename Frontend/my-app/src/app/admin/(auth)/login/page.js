@@ -112,7 +112,7 @@ export default function AdminSignup() {
       {/* Background effects */}
       
 
-      <div className="relative z-10 flex justify-center   w-full max-w-xl overflow-hidden rounded-3xl border border-white/8 bg-light  dark:bg-[#0D0F14]/90 shadow-2xl shadow-black/40 backdrop-blur-2xl lg:grid-cols-2">
+      <div className="relative z-10 flex justify-center   w-full max-w-xl overflow-hidden rounded-3xl border bg-light  glass-bento shadow-2xl backdrop-blur-2xl lg:grid-cols-2">
        
 
         {/* Signup form */}
@@ -121,7 +121,7 @@ export default function AdminSignup() {
             
             <Link href="/" className="flex items-center gap-2">
               <Terminal size={23} className="text-emerald-400" />
-              <span className="text-lg font-semibold text-charcoal dark:text-white">
+              <span className="text-lg font-semibold  text-white">
                 Nexora<span className="text-emerald-400">.</span>
               </span>
             </Link>
@@ -129,7 +129,7 @@ export default function AdminSignup() {
             <ShieldCheck className="text-emerald-400" size={24} />
           </div>
 
-          <div className="mb-8 dark:text-white text-charcoal">
+          <div className="mb-8 text-white">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/15 bg-emerald-400/6 px-3 py-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-400">
@@ -138,7 +138,7 @@ export default function AdminSignup() {
             </div>
 
             <h2 className="text-3xl font-semibold tracking-tight">
-              Create your account
+              Sign in your account
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-slate-400">
@@ -153,7 +153,7 @@ export default function AdminSignup() {
                 htmlFor="name"
                 className="mb-2 block text-xs font-medium text-slate-300"
               >
-                Full name
+                User name
               </label>
 
               <div className="relative">

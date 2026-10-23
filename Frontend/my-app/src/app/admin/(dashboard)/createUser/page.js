@@ -3,7 +3,9 @@
 
 import Dropdown from "@/app/adminComponents/Dropdown";
 import StatusToggle from "@/app/adminComponents/StatusToggle";
+import { PopUp } from "@/app/components/PopUp";
 import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function Page() {
@@ -12,6 +14,8 @@ export default function Page() {
         handleSubmit,
         reset,
         setValue,
+        setError,
+        clearErrors,
         watch,
         formState: { errors, isSubmitting },
     } = useForm({
@@ -20,14 +24,14 @@ export default function Page() {
             emailId: "",
             role: "",
             password: "",
-            status: true,
+            status: false,
         },
     });
-
+    const [popUp,setPopUp] = useState(false)
     const status = watch("status");
 
     const onSubmit = async (data) => {
-        console.log(data);
+        clearErrors();
 
         try {
             await axios.post(
@@ -35,25 +39,48 @@ export default function Page() {
                 data,
                 { withCredentials: true }
             );
-
+            setPopUp(true)
+            setTimeout(()=>{
+              setPopUp(false)  
+            },2000)
             reset();
-        } catch (err) {
-            console.error(
-                err.response?.data || err.message
-            );
+        }catch (err) {
+            const message =
+                err.response?.data?.message ||
+                "Failed to create user. Please try again.";
+
+            if (message.toLowerCase().includes("password")) {
+                setError("password", {
+                    type: "server",
+                    message,
+                });
+            } else if (message.toLowerCase().includes("username")) {
+                setError("username", {
+                    type: "server",
+                    message,
+                });
+            } else if (message.toLowerCase().includes("email")) {
+                setError("emailId", {
+                    type: "server",
+                    message,
+                });
+            } else {
+                setError("root.serverError", {
+                    type: "server",
+                    message,
+                });
+            }
         }
     };
 
     return (
-        <div className="mt-11">
-            <h1 className="font-mon mb-4">
-                Create New User
-            </h1>
+        <div className="mt-11   ">
+            <h1 className="text-3xl mb-4">Create New User</h1>
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-4 lg:flex-row">
                     {/* User Details Form */}
-                    <div className="grid w-full max-w-3xl gap-4 rounded-lg dark:bg-[#051121] px-6 py-4">
+                    <div className="grid w-full max-w-3xl gap-4 rounded-lg bg-[#051121] px-6 py-4">
 
                         {/* Username */}
                         <div>
@@ -71,7 +98,7 @@ export default function Page() {
                                         message: "Username must have at least 2 characters",
                                     },
                                 })}
-                                className="w-full rounded-xl border-2 border-graphite bg-light px-4 py-3 text-sm placeholder-slate-600 dark:border-white/10 dark:bg-[#051121]"
+                                className="w-full rounded-xl border-2 px-4 py-3 text-sm placeholder-slate-600 border-white/10 bg-[#051121]"
                             />
 
                             {errors.username && (
@@ -97,7 +124,7 @@ export default function Page() {
                                         message: "Enter a valid email address",
                                     },
                                 })}
-                                className="w-full rounded-xl border-2 border-graphite bg-light px-4 py-3 text-sm placeholder-slate-600 dark:border-white/10 dark:bg-[#051121]"
+                                className="w-full rounded-xl border-2 px-4 py-3 text-sm placeholder-slate-600 border-white/10 bg-[#051121]"
                             />
 
                             {errors.emailId && (
@@ -117,11 +144,9 @@ export default function Page() {
                                 {...register("role", {
                                     required: "Please select a user role",
                                 })}
-                                className="w-full rounded-lg border border-white/10 bg-surface px-4 py-3 text-gray-300 outline-none focus:border-slate-400"
+                                className="w-full rounded-lg border border-white/10 bg-[#051121]  px-4 py-3 text-gray-300 outline-none focus:border-slate-400"
                             >
-                                <option value="">
-                                    Select user role
-                                </option>
+                                <option value="">Select user role</option>
                                 <option value="admin">Admin</option>
                                 <option value="superadmin">Super admin</option>
                                 <option value="viewer">Viewer</option>
@@ -151,7 +176,7 @@ export default function Page() {
                                         message: "Password must have at least 8 characters",
                                     },
                                 })}
-                                className="w-full rounded-xl border-2 border-graphite bg-light px-4 py-3 text-sm placeholder-slate-600 dark:border-white/10 dark:bg-[#051121]"
+                                className="w-full rounded-xl border-2  px-4 py-3 text-sm placeholder-slate-600 border-white/10 bg-[#051121]"
                             />
 
                             {errors.password && (
@@ -160,10 +185,17 @@ export default function Page() {
                                 </p>
                             )}
                         </div>
+
+                        {/* General Backend Error */}
+                        {errors.root?.serverError && (
+                            <p className="text-sm text-red-400">
+                                {errors.root.serverError.message}
+                            </p>
+                        )}
                     </div>
 
                     {/* Account Status */}
-                    <div className="w-full flex flex-col max-w-3xl rounded-lg dark:bg-[#051121] px-6 py-4">
+                    <div className="w-full flex flex-col max-w-3xl rounded-lg bg-[#051121] px-6 py-4">
                         <h2 className="font-medium text-white">
                             Account Status
                         </h2>
@@ -176,21 +208,21 @@ export default function Page() {
                                 })
                             }
                         />
+
                         <div className="flex-1 flex justify-end items-end">
-
-                        <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="mt-4 rounded-lg bg-[#6A5AF7] px-4 py-3 text-xs font-medium text-light transition-colors hover:bg-violet-600 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                        >
-                            {isSubmitting
-                                ? "Creating User..."
-                                : "Create User"}
-                        </button>
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="mt-4 rounded-lg bg-[#6A5AF7] px-4 py-3 text-xs font-medium text-light transition-colors hover:bg-violet-600 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                            >
+                                {isSubmitting
+                                    ? "Creating User..."
+                                    : "Create User"}
+                            </button>
                         </div>
-
                     </div>
                 </div>
+                    <PopUp show={popUp} text={"User has been created successfully"} />        
             </form>
         </div>
     );

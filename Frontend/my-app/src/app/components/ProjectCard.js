@@ -1,5 +1,9 @@
+'use client';
+import axios from "axios";
 import { ChevronRight } from "lucide-react"
+import { useEffect, useState } from "react";
 export function ProjectCard({title,description,tools,onView}) {
+  
   return (
     <div>
       <div className=" glass-bento  border border-graphite shadow  rounded-2xl p-8 group " >
