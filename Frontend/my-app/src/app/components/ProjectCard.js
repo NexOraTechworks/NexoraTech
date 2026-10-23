@@ -1,8 +1,9 @@
 'use client';
 import axios from "axios";
 import { ChevronRight } from "lucide-react"
+import Image from "next/image";
 import { useEffect, useState } from "react";
-export function ProjectCard({title,description,tools,onView}) {
+export function ProjectCard({title,description,tools,onView,image}) {
   
   return (
     <div>
@@ -12,8 +13,14 @@ export function ProjectCard({title,description,tools,onView}) {
         Cloud / System 
         </span>
 
-          <img className=" object-fit w-full h-full group-hover:scale-105  transition-all duration-500 rounded-2xl " src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" />
-        </div>
+        <Image
+  alt="Nexora"
+  width={40}
+  height={40}
+  priority
+  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500 rounded-2xl"
+  src={image}
+/>        </div>
 
         <h2 className=" text-2xl font-syne tracking-tight mt-6 group-hover:text-emerald transition-all duration-500  " >
          {title}

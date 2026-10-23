@@ -22,17 +22,17 @@ export function ProjectDetails({ project, onClose, isOpen }) {
           <div className="flex h-full flex-col">
             <div>
               <h2 className="mb-4 text-2xl font-syne dark:text-white text-charcoal tracking-tight">
-                {project.title}
+                {project.project_name}
               </h2>
 
               <p className="mb-10 text-sm font-light leading-relaxed text-slate-400">
-                {project.details.features}
+                {project.additional_details?.description || ""}
               </p>
             </div>
 
-            <div className="rounded-xl dark:bg-black bg-light   p-5">
+            <div className="rounded-xl dark:bg-black bg-light p-5">
               <ul className="px-5">
-                {project.details.implementation.map((data, index) => (
+                {(project.tech_stack || []).map((data, index) => (
                   <li
                     key={index}
                     className="list-disc py-0.5 text-slate-400"

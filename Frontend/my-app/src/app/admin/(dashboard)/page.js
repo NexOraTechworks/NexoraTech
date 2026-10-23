@@ -1,15 +1,24 @@
-
-import { cookies } from "next/headers"
+'use client';
+// import { cookies } from "next/headers"
 // import { ProjectInfo } from "../adminComponents/ProjectInfo"
-
+import { useState,useEffect } from "react"
+import axios from "axios"
 // import { AdminNav } from "../adminComponents/AdminNav"
 import UserList from "../../adminComponents/UserList"
-export default async function admin ()  {
+export default  function admin ()  {
  
-const cookiestore = await cookies()
+// const cookiestore = await cookies()
+const [users,setUsers]= useState([])
+useEffect( ()=>{
+  const fetchUsers = async()=>{
+    const data = await axios.get(process.env.NEXT_PUBLIC_GET_USERS)
+    setUsers(data)
+  }
+  fetchUsers()
+},[])
+console.log(users)
 
-const log = cookiestore.get('loggedIn')
-console.log(log)
+// const log = cookiestore.get('loggedIn')
 
   
   return (

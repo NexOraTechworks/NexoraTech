@@ -1,31 +1,28 @@
-
 "use client";
 
 export default function StatusToggle({ status, onChange }) {
+    const isActive = status === true;
+
     return (
-        <div className="flex items-center gap-3 mt-3">
+        <div className="flex items-center gap-3 py-4">
             <button
                 type="button"
                 role="switch"
-                aria-checked={status}
-                onClick={() => onChange(!status)}
-                className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-200 ${
-                    status ? "bg-emerald-500" : "bg-gray-400"
+                aria-checked={isActive}
+                onClick={() => onChange(!isActive)}
+                className={`relative h-6 w-11 rounded-full transition-colors duration-200 ${
+                    isActive ? "bg-emerald-500" : "bg-gray-600"
                 }`}
             >
                 <span
-                    className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
-                        status ? "translate-x-5" : "translate-x-0"
+                    className={`absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-transform duration-200 ${
+                        isActive ? "translate-x-5" : "translate-x-0"
                     }`}
                 />
             </button>
 
-            <span
-                className={`text-sm font-medium ${
-                    status ? "text-emerald-500" : "text-gray-400"
-                }`}
-            >
-                {status ? "Active" : "Inactive"}
+            <span className="text-sm text-white">
+                {isActive ? "Active" : "Inactive"}
             </span>
         </div>
     );

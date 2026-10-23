@@ -1,7 +1,5 @@
-
 "use client";
 
-import Dropdown from "@/app/adminComponents/Dropdown";
 import StatusToggle from "@/app/adminComponents/StatusToggle";
 import { PopUp } from "@/app/components/PopUp";
 import axios from "axios";
@@ -27,24 +25,43 @@ export default function Page() {
             status: false,
         },
     });
-    const [popUp,setPopUp] = useState(false)
+
+    const [popUp, setPopUp] = useState(false);
+
     const status = watch("status");
+
+    const handleStatusChange = (value) => {
+        setValue("status", value, {
+            shouldDirty: true,
+            shouldValidate: true,
+        });
+    };
 
     const onSubmit = async (data) => {
         clearErrors();
 
         try {
+            const payload = {
+                ...data,
+                status: data.status === true,
+            };
+
+            console.log("Submitting user status:", payload.status);
+
             await axios.post(
                 process.env.NEXT_PUBLIC_USERS_API_URL,
-                data,
+                payload,
                 { withCredentials: true }
             );
-            setPopUp(true)
-            setTimeout(()=>{
-              setPopUp(false)  
-            },2000)
+
+            setPopUp(true);
+
+            setTimeout(() => {
+                setPopUp(false);
+            }, 2000);
+
             reset();
-        }catch (err) {
+        } catch (err) {
             const message =
                 err.response?.data?.message ||
                 "Failed to create user. Please try again.";
@@ -74,14 +91,13 @@ export default function Page() {
     };
 
     return (
-        <div className="mt-11   ">
-            <h1 className="text-3xl mb-4">Create New User</h1>
+        <div className="mt-11">
+            <h1 className="mb-4 text-3xl">Create New User</h1>
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-4 lg:flex-row">
                     {/* User Details Form */}
                     <div className="grid w-full max-w-3xl gap-4 rounded-lg bg-[#051121] px-6 py-4">
-
                         {/* Username */}
                         <div>
                             <label className="mb-2.5 block font-mon text-xs tracking-tighter text-white">
@@ -95,10 +111,11 @@ export default function Page() {
                                     required: "Username is required",
                                     minLength: {
                                         value: 2,
-                                        message: "Username must have at least 2 characters",
+                                        message:
+                                            "Username must have at least 2 characters",
                                     },
                                 })}
-                                className="w-full rounded-xl border-2 px-4 py-3 text-sm placeholder-slate-600 border-white/10 bg-[#051121]"
+                                className="w-full rounded-xl border-2 border-white/10 bg-[#051121] px-4 py-3 text-sm placeholder-slate-600"
                             />
 
                             {errors.username && (
@@ -121,10 +138,11 @@ export default function Page() {
                                     required: "Email is required",
                                     pattern: {
                                         value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                        message: "Enter a valid email address",
+                                        message:
+                                            "Enter a valid email address",
                                     },
                                 })}
-                                className="w-full rounded-xl border-2 px-4 py-3 text-sm placeholder-slate-600 border-white/10 bg-[#051121]"
+                                className="w-full rounded-xl border-2 border-white/10 bg-[#051121] px-4 py-3 text-sm placeholder-slate-600"
                             />
 
                             {errors.emailId && (
@@ -144,11 +162,13 @@ export default function Page() {
                                 {...register("role", {
                                     required: "Please select a user role",
                                 })}
-                                className="w-full rounded-lg border border-white/10 bg-[#051121]  px-4 py-3 text-gray-300 outline-none focus:border-slate-400"
+                                className="w-full rounded-lg border border-white/10 bg-[#051121] px-4 py-3 text-gray-300 outline-none focus:border-slate-400"
                             >
                                 <option value="">Select user role</option>
                                 <option value="admin">Admin</option>
-                                <option value="superadmin">Super admin</option>
+                                <option value="superadmin">
+                                    Super admin
+                                </option>
                                 <option value="viewer">Viewer</option>
                             </select>
 
@@ -173,10 +193,11 @@ export default function Page() {
                                     required: "Password is required",
                                     minLength: {
                                         value: 8,
-                                        message: "Password must have at least 8 characters",
+                                        message:
+                                            "Password must have at least 8 characters",
                                     },
                                 })}
-                                className="w-full rounded-xl border-2  px-4 py-3 text-sm placeholder-slate-600 border-white/10 bg-[#051121]"
+                                className="w-full rounded-xl border-2 border-white/10 bg-[#051121] px-4 py-3 text-sm placeholder-slate-600"
                             />
 
                             {errors.password && (
@@ -195,21 +216,17 @@ export default function Page() {
                     </div>
 
                     {/* Account Status */}
-                    <div className="w-full flex flex-col max-w-3xl rounded-lg bg-[#051121] px-6 py-4">
+                    <div className="flex w-full max-w-3xl flex-col rounded-lg bg-[#051121] px-6 py-4">
                         <h2 className="font-medium text-white">
                             Account Status
                         </h2>
 
                         <StatusToggle
                             status={status}
-                            onChange={(value) =>
-                                setValue("status", value, {
-                                    shouldDirty: true,
-                                })
-                            }
+                            onChange={handleStatusChange}
                         />
 
-                        <div className="flex-1 flex justify-end items-end">
+                        <div className="flex flex-1 items-end justify-end">
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
@@ -222,7 +239,11 @@ export default function Page() {
                         </div>
                     </div>
                 </div>
-                    <PopUp show={popUp} text={"User has been created successfully"} />        
+
+                <PopUp
+                    show={popUp}
+                    text="User has been created successfully"
+                />
             </form>
         </div>
     );

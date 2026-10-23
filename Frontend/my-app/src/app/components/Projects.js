@@ -33,8 +33,8 @@ export function Projects() {
         </span>
         <div className=" grid grid-cols-1 md:grid-cols-2 gap-6" >
             {
-              projects.map((data)=>
-                  <ProjectCard onView={()=>handleOpen(data)}  key={ data.project_name }  title={data.project_name} tools={data.tech_stack} description={data.short_description} />
+              projects.map((data,index)=>
+                  <ProjectCard onView={()=>handleOpen(data)}  key={index} image={data.project_image} title={data.project_name} tools={data.tech_stack} description={data.short_description} />
               )
             }
             
