@@ -100,7 +100,7 @@ export function AdminNav({toggle,toggleNav}) {
     }`}
 >
   <UserRoundPlus size={16} />
-  Create User
+  User Management
 </Link>
 
           

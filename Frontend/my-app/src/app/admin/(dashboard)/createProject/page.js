@@ -4,63 +4,137 @@ import { ErrorMessage } from "../../../adminComponents/ErrorMessage";
 import { CloudUpload } from "lucide-react";
 import { useState } from "react";
 import axios from "axios";
+import { PopUp } from "@/app/components/PopUp";
 
 export default function page() {
-    const { register, handleSubmit, formState: { errors, }, reset } = useForm(
+    const { register, handleSubmit,  formState: { errors, isSubmitting }, reset } = useForm(
         {
             defaultValues: { project_name: "", url: "", short_description: "", additional_details: "", project_image: "", tech_stack: "" }
         }
     )
     const [imagePreview, setImagePreview] = useState("");
     const [errorMessage, setErrorMessage] = useState("")
+    const [popUp,setPopup] = useState(false)
 
  
+// const submitProject = async (data) => {
+//     try {
+//         const formData = new FormData();
+
+//         formData.append("project_name", data.project_name);
+//         formData.append("short_description", data.short_description || "");
+
+//         // Convert comma-separated text into an array of technologies
+//         const technologies = data.tech_stack
+//             .split(",")
+//             .map((tech) => tech.trim())
+//             .filter(Boolean);
+
+//         formData.append("tech_stack", JSON.stringify(technologies));
+
+//         // Convert additional details text into a JSON object
+//         formData.append(
+//             "additional_details",
+//             JSON.stringify(
+//                 data.additional_details?.trim()
+//                     ? { description: data.additional_details.trim() }
+//                     : {}
+//             )
+//         );
+
+//         if (data.project_image?.[0]) {
+//             formData.append("project_image", data.project_image[0]);
+//         }
+
+//         const response = await axios.post(
+//             process.env.NEXT_PUBLIC_PROJECTS_API_URL,
+//             formData,
+//             { withCredentials: true }
+//         );
+
+//         console.log("Project created:", response.data);
+//         setPopup(true)
+//         setTimeout(()=>{
+//             setPopup(false)
+//         },2000)
+
+//         setImagePreview("");
+//         reset();
+//     } catch (error) {
+//         setErrorMessage(
+//             error.response?.data?.message ||
+//             error.message ||
+//             "Something went wrong. Please try again."
+//         );
+//         setPopup(true)
+//         setTimeout(()=>{
+//             setPopup(false)
+//         },2000)
+//     }
+// };
 const submitProject = async (data) => {
+    setErrorMessage("");
+
     try {
+        // Your existing FormData creation and axios request...
         const formData = new FormData();
 
-        formData.append("project_name", data.project_name);
-        formData.append("short_description", data.short_description || "");
+                formData.append("project_name", data.project_name);
+                formData.append("short_description", data.short_description || "");
+        
+                // Convert comma-separated text into an array of technologies
+                const technologies = data.tech_stack
+                    .split(",")
+                    .map((tech) => tech.trim())
+                    .filter(Boolean);
+        
+                formData.append("tech_stack", JSON.stringify(technologies));
+        
+                // Convert additional details text into a JSON object
+                formData.append(
+                    "additional_details",
+                    JSON.stringify(
+                        data.additional_details?.trim()
+                            ? { description: data.additional_details.trim() }
+                            : {}
+                    )
+                );
+        
+                if (data.project_image?.[0]) {
+                    formData.append("project_image", data.project_image[0]);
+                }
+        
+                const response = await axios.post(
+                    process.env.NEXT_PUBLIC_PROJECTS_API_URL,
+                    formData,
+                    { withCredentials: true }
+                );
+        
+                console.log("Project created:", response.data);
+        setErrorMessage("");
+        setPopup(true);
 
-        // Convert comma-separated text into an array of technologies
-        const technologies = data.tech_stack
-            .split(",")
-            .map((tech) => tech.trim())
-            .filter(Boolean);
-
-        formData.append("tech_stack", JSON.stringify(technologies));
-
-        // Convert additional details text into a JSON object
-        formData.append(
-            "additional_details",
-            JSON.stringify(
-                data.additional_details?.trim()
-                    ? { description: data.additional_details.trim() }
-                    : {}
-            )
-        );
-
-        if (data.project_image?.[0]) {
-            formData.append("project_image", data.project_image[0]);
-        }
-
-        const response = await axios.post(
-            process.env.NEXT_PUBLIC_PROJECTS_API_URL,
-            formData,
-            { withCredentials: true }
-        );
-
-        console.log("Project created:", response.data);
+        setTimeout(() => {
+            setPopup(false);
+        }, 2000);
 
         setImagePreview("");
         reset();
+
     } catch (error) {
-        console.error("Message:", error.message);
-        console.error("Status:", error.response?.status);
-        console.error("Backend error:", error.response?.data);
+        setErrorMessage(
+            error.response?.data?.message ||
+            error.message ||
+            "Something went wrong. Please try again."
+        );
+
+        setPopup(true);
+
+        setTimeout(() => {
+            setPopup(false);
+        }, 2000);
     }
 };
-
     return (
         <section className=" mt-11 ">
             <h2 className=" mb-4 text-3xl ">
@@ -266,20 +340,21 @@ const submitProject = async (data) => {
                             <div className=" flex-1 mb-2.5 flex justify-end items-end ">
                                 <button
                                     type="submit"
-                                    // disabled={isSubmitting}
+                                    disabled={isSubmitting}
                                     className="bg-[#6A5AF7]  rounded-lg font-medium text-xs md:text-sm mt-4 px-6 py-3 text-light hover:bg-violet-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     <span>
-                                        {/* {isSubmitting
-                                ? "Dispatching..."
-                                : "Dispatch Transmission"} */}
-                                        Submit
+                                        {isSubmitting
+                                ? "Submitting..."
+                                : "Submit"}
+                                    
                                     </span>
                                 </button>
                             </div>
 
                         </div>
                     </div>
+                    <PopUp show={popUp} text={errorMessage?errorMessage:"Project added successfully"}/>
                 </form>
             </div>
         </section>
