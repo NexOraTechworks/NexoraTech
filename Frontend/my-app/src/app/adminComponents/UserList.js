@@ -8,7 +8,7 @@ export default function UserList() {
   useEffect( ()=>{
     try{
       const fetchUsers = async()=>{
-        const data = await axios.get(process.env.NEXT_PUBLIC_GET_USERS,{withCredentials:true})
+        const data = await axios.get( `${process.env.NEXT_PUBLIC_BACKEND_URL}/users`,{withCredentials:true})
         setUsers(data.data.data)
       }
       fetchUsers()

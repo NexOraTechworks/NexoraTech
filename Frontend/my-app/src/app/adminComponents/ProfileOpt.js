@@ -3,7 +3,7 @@ import { User, ChevronDown,ChevronUp, LogOut } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import axios from "axios"
-export function ProfileOpt() {
+export function ProfileOpt({username}) {
      const [toggle,setToggle] = useState(false)
      const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -14,7 +14,7 @@ export function ProfileOpt() {
      const logOut = async () => {
         try {
           setLoading(true)
-          await axios.post(process.env.NEXT_PUBLIC_LOGOUT_URL, {}, { withCredentials: true })
+          await axios.post( `${process.env.NEXT_PUBLIC_BACKEND_URL}/logout`, {}, { withCredentials: true })
           router.replace("/admin/login");
           router.refresh();
         } catch (error) {
@@ -34,7 +34,7 @@ export function ProfileOpt() {
                     <User size={16} />
                 </div>
                 <h2>
-                    Akash
+                    {username}
                 </h2>
                 {toggle?
                 <ChevronUp size={16}/>:

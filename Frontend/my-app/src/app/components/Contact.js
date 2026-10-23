@@ -35,8 +35,8 @@ export function Contact() {
 
         try {
             await axios.post(
-                process.env.NEXT_PUBLIC_INQUIRY_API_URL,
-                data
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/inquiry`,
+                data,{withCredentials:true}
             );
 
             // Only reset the form after a successful request
@@ -49,11 +49,20 @@ export function Contact() {
             }, 2000);
             reset();
 
-        } catch (err) {
-            console.error(err);
+        } catch (error) {
+          
+                // console.error("Message:", error.message);
+                // console.error("Status:", error.response?.status);
+                // console.error("Backend error:", error.response?.data);
+            
+                setError(
+                    error.response?.data?.message ||
+                    "Failed to send your inquiry. Please try again."
+                );
+            
 
             setError(
-                err.response?.data?.message ||
+                error.response?.data?.message ||
                 "Unable to submit your inquiry. Please try again."
             );
 

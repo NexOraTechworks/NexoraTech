@@ -98,7 +98,7 @@ export default function AdminSignup() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
-      await axios.post(process.env.NEXT_PUBLIC_LOGIN_API_URL,formData,{withCredentials:true})
+      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`,formData,{withCredentials:true})
       router.push("/admin")
     }catch(error){
       console.log(error)

@@ -9,7 +9,7 @@ import { PopUp } from "@/app/components/PopUp";
 export default function page() {
     const { register, handleSubmit,  formState: { errors, isSubmitting }, reset } = useForm(
         {
-            defaultValues: { project_name: "", url: "", short_description: "", additional_details: "", project_image: "", tech_stack: "" }
+            defaultValues: { project_name: "", short_description: "", additional_details: "", project_image: "", tech_stack: "" }
         }
     )
     const [imagePreview, setImagePreview] = useState("");
@@ -74,7 +74,6 @@ export default function page() {
 // };
 const submitProject = async (data) => {
     setErrorMessage("");
-
     try {
         // Your existing FormData creation and axios request...
         const formData = new FormData();
@@ -103,9 +102,13 @@ const submitProject = async (data) => {
                 if (data.project_image?.[0]) {
                     formData.append("project_image", data.project_image[0]);
                 }
-        
+                console.log("FormData fields:");
+
+                for (const [key, value] of formData.entries()) {
+                    console.log(key, value);
+                }
                 const response = await axios.post(
-                    process.env.NEXT_PUBLIC_PROJECTS_API_URL,
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/projects`,
                     formData,
                     { withCredentials: true }
                 );
