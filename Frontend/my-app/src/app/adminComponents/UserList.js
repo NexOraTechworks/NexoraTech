@@ -1,7 +1,18 @@
-
+'use client';
+import axios from "axios";
 import { SquarePen } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function UserList() {
+  const [users,setUsers]= useState([])
+  useEffect( ()=>{
+    const fetchUsers = async()=>{
+      const data = await axios.get(process.env.NEXT_PUBLIC_GET_USERS)
+      setUsers(data.data.data)
+    }
+    fetchUsers()
+  },[])
+  console.log(users)
   return (
     <div>
       <div className="bg-[#051121] max-h-screen w-full max-w-3xl mt-4 rounded-lg px-6 py-4">
@@ -18,7 +29,7 @@ export default function UserList() {
 
        
 <div className="w-full max-w-175 overflow-x-auto rounded-lg">
-  <table className="w-full min-w-[600px] text-left">
+  <table className="w-full min-w-150 text-left">
     <thead className="border-b border-[#1A2A48]">
       <tr>
         <th className="whitespace-nowrap px-3 py-4 text-xs font-medium uppercase tracking-wider text-[#8FA9D0] sm:px-5">
@@ -33,26 +44,34 @@ export default function UserList() {
         <th className="whitespace-nowrap px-3 py-4 text-xs font-medium uppercase tracking-wider text-[#8FA9D0] sm:px-5">
           Status
         </th>
+      
       </tr>
     </thead>
 
     <tbody>
-      <tr className="border-b border-[#1A2A48]/60">
+      { users.map((data,index)=>{
+        return(
+      <tr key={index} className="border-b border-[#1A2A48]/60">
+          <>
         <td className="whitespace-nowrap px-3 py-4 text-xs font-medium tracking-wider sm:px-5">
-          Akash
+          {data.username}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-xs font-medium tracking-wider sm:px-5">
-          athengumparampil@gmail.com
+          {data.emailId}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-xs font-medium tracking-wider sm:px-5">
-          React Developer
+         {data.role}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-xs font-medium tracking-wider sm:px-5">
-          <span className="inline-flex rounded-full text-emerald-400">
-            Active
+          <span className={`inline-flex rounded-full ${ data.status? "text-emerald-400" :"text-red-600"}`}>
+           {data.status}
           </span>
         </td>
+      </>
       </tr>
+        )
+      })
+        }
     </tbody>
   </table>
 </div>

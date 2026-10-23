@@ -1,8 +1,9 @@
 'use client';
 import { ProjectCard } from "./ProjectCard";
-import projects from "../data/ProjectData";
-import { useState } from "react";
+// import projects from "../data/ProjectData";
+import { useState ,useEffect } from "react";
 import { ProjectDetails } from "./ProjectDetails";
+import axios from "axios";
 export function Projects() {
   const [viewProject,setViewProject] = useState(null)
   const [open,setOpen] = useState(false)
@@ -14,6 +15,15 @@ export function Projects() {
   const handleClose = () => {
     setOpen(false);
   };
+  const [projects,setProjects] = useState([])
+  useEffect(()=>{
+    const fetchProject = async()=>{
+      const response = await axios.get(process.env.NEXT_PUBLIC_PROJECTS_API_URL)
+      setProjects(response.data.data)
+    }
+    fetchProject()
+  },[])
+  console.log(projects)
 
   return (
     <section id="projects" className="  border-t py-24 px-8 border-white/5  md:max-w-6xl mx-auto  ">
@@ -24,7 +34,7 @@ export function Projects() {
         <div className=" grid grid-cols-1 md:grid-cols-2 gap-6" >
             {
               projects.map((data)=>
-                  <ProjectCard onView={()=>handleOpen(data)}  key={ data.title }  title={data.title} tools={data.tools} description={data.description} />
+                  <ProjectCard onView={()=>handleOpen(data)}  key={ data.project_name }  title={data.project_name} tools={data.tech_stack} description={data.short_description} />
               )
             }
             

@@ -2,6 +2,7 @@
 import { User, ChevronDown,ChevronUp, LogOut } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import axios from "axios"
 export function ProfileOpt() {
      const [toggle,setToggle] = useState(false)
      const [loading, setLoading] = useState(false)
