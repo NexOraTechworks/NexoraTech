@@ -11,8 +11,13 @@ export default  function admin ()  {
 const [users,setUsers]= useState([])
 useEffect( ()=>{
   const fetchUsers = async()=>{
-    const data = await axios.get(process.env.NEXT_PUBLIC_GET_USERS)
-    setUsers(data)
+    try{
+
+      const data = await axios.get(process.env.NEXT_PUBLIC_GET_USERS,{withCredentials:true})
+      setUsers(data)
+    }catch(error){
+      console.error(error)
+    }
   }
   fetchUsers()
 },[])

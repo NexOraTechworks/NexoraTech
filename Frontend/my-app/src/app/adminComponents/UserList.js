@@ -6,11 +6,15 @@ import { useEffect, useState } from "react";
 export default function UserList() {
   const [users,setUsers]= useState([])
   useEffect( ()=>{
-    const fetchUsers = async()=>{
-      const data = await axios.get(process.env.NEXT_PUBLIC_GET_USERS)
-      setUsers(data.data.data)
+    try{
+      const fetchUsers = async()=>{
+        const data = await axios.get(process.env.NEXT_PUBLIC_GET_USERS,{withCredentials:true})
+        setUsers(data.data.data)
+      }
+      fetchUsers()
+    }catch(error){
+      console.error(error)
     }
-    fetchUsers()
   },[])
   console.log(users)
   return (
