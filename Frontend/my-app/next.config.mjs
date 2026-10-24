@@ -1,15 +1,30 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
     return [
       {
         source: '/',
-        destination: '/client', // Replace with your target page
-   // true triggers a 301 permanent redirect; false triggers a 307 temporary redirect
+        destination: '/client',
       },
-    ]
+      {
+        source: '/uploads/:path*',
+        destination: 'http://localhost:7070/uploads/:path*',
+
+      }
+    ];
   },
-  /* config options here */
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '7070',
+        pathname: '/uploads/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

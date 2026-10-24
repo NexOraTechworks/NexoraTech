@@ -13,8 +13,9 @@ useEffect( ()=>{
   const fetchUsers = async()=>{
     try{
 
-      const data = await axios.get(process.env.NEXT_PUBLIC_GET_USERS,{withCredentials:true})
-      setUsers(data)
+      const response = await axios.get("http://localhost:7070/me",{withCredentials:true})
+      const username = response.data.user.username
+      setUsers(username)
     }catch(error){
       console.error(error)
     }
@@ -29,7 +30,7 @@ console.log(users)
   return (
     <section className=" max-h-screen items-center justify-center overflow-hidden px-4 py-10 text-white ">
      <h1 className="   text-3xl mb-3" >
-      Welcome back, Aakash
+      Welcome back, {users}
      </h1>
      <UserList/>
         {/* <ProjectInfo/> */}

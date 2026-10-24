@@ -49,7 +49,7 @@ export default function Page() {
             console.log("Submitting user status:", payload.status);
 
             await axios.post(
-                process.env.NEXT_PUBLIC_USERS_API_URL,
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/create-user`,
                 payload,
                 { withCredentials: true }
             );
