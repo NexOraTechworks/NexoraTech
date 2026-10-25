@@ -1,15 +1,17 @@
 'use client';
 import { ProjectCard } from "./ProjectCard";
 // import projects from "../data/ProjectData";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useCallback } from "react";
 import { FolderOpen } from "lucide-react";
 import { ProjectDetails } from "./ProjectDetails";
 import axios from "axios";
 import Loader from "./Loader";
+import FetchError from "./fetchError";
 export function Projects() {
   const [viewProject, setViewProject] = useState(null)
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [errorMessage,setErrorMessage] = useState("")
   const handleOpen = (projects) => {
     setViewProject(projects);
     setOpen(true);
@@ -20,32 +22,44 @@ export function Projects() {
   };
   const [projects, setProjects] = useState([]);
 
-  useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/projects`;
 
-        console.log("API URL:", apiUrl);
+const fetchProject = useCallback(async () => {
+  setErrorMessage("");
+  setLoading(true);
 
-        const response = await axios.get(apiUrl, { withCredentials: true });
+  try {
+    const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/projects`;
 
-        console.log("Projects data:", response.data.data);
+    const response = await axios.get(apiUrl, {
+      withCredentials: true,
+    });
 
-        setProjects(response.data.data);
-      } catch (error) {
-        console.error(
-          "Error fetching projects:",
-          error.response?.data || error.message
-        );
-      }
-      finally {
-        setLoading(false)
-      }
-    };
+    setProjects(response.data.data);
+  } catch (error) {
+    console.log("Error fetching projects:", error);
 
-    fetchProject();
-  }, []);
+    setErrorMessage(
+      error.response?.data?.message ||
+      error.message ||
+      "Unable to fetch projects. Please try again."
+    );
+  } finally {
+    setLoading(false);
+  }
+}, []);
+
+useEffect(() => {
+  fetchProject();
+}, [fetchProject]);
+
   console.log(projects)
+  if(errorMessage){
+    return(
+      <FetchError  message={errorMessage}
+      onRetry={fetchProject}
+      isLoading={loading}/>
+    )
+  }
 
   return (
     <section id="projects" className="  border-t py-24 px-8 border-white/5  md:max-w-6xl mx-auto  ">
