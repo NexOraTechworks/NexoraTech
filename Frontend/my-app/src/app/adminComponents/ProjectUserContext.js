@@ -26,6 +26,7 @@ export function ProjectUserProvider({ children }) {
     const [usersError, setUsersError] = useState('');
     const [userError, setUserError] = useState('');
     const [deleteProjectError, setDeleteProjectError] = useState('');
+    const [deleteUserError,setDeleteUserError] = useState('')
 
     // Fetch projects
     const fetchProjects = useCallback(async () => {
@@ -128,8 +129,8 @@ export function ProjectUserProvider({ children }) {
     // Fetch users only for superadmins
     const fetchUsers = useCallback(async () => {
         if (!['admin', 'superadmin'].includes(user?.role)) {
-            return null;
-        }{
+        
+    
             setUsers([]);
             setUsersError('');
             setUsersLoading(false);
@@ -145,6 +146,7 @@ export function ProjectUserProvider({ children }) {
                 `${process.env.NEXT_PUBLIC_BACKEND_URL}/users`,
                 { withCredentials: true }
             );
+            console.log(response)
 
             const fetchedUsers = response.data?.data;
 
@@ -165,6 +167,27 @@ export function ProjectUserProvider({ children }) {
             setUsersLoading(false);
         }
     }, [user?.role]);
+    const deleteUser = useCallback(async(id)=>{
+       
+            try{
+                setDeleteUserError('')
+                await axios.delete( `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${id}`,{withCredentials:true})
+                setUsers((user)=>
+                    user.filter((curr)=>curr.id !== id)
+                )
+               return true
+            }catch (error) {
+                console.error('Failed to delete User:', error);
+    
+                setDeleteUserError(
+                    error.response?.data?.message ||
+                    error.message ||
+                    'Unable to delete User'
+                );
+    
+                return false;
+            }
+    },[])
 
     // Initial fetch
     useEffect(() => {
@@ -194,11 +217,14 @@ export function ProjectUserProvider({ children }) {
                 usersError,
                 userError,
                 deleteProjectError,
+                deleteUserError,
 
                 fetchProjects,
                 fetchUsers,
                 fetchMe,
+
                 deleteProjects,
+                deleteUser,
 
                 setProjects,
                 setUsers,

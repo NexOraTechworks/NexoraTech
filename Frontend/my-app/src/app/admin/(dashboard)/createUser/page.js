@@ -6,6 +6,7 @@ import axios from "axios";
 import { SquarePen } from "lucide-react";
 import StatusToggle from "@/app/adminComponents/StatusToggle";
 import { PopUp } from "@/app/components/PopUp";
+import { useRouter } from "next/navigation";
 
 const DEFAULT_VALUES = {
     username: "",
@@ -31,6 +32,7 @@ export default function Page() {
         defaultValues: DEFAULT_VALUES,
         mode: "onBlur",
     });
+    const router = useRouter()
 
     const [popUp, setPopUp] = useState({
         show: false,
@@ -147,19 +149,21 @@ export default function Page() {
 
     return (
         <div className="mt-11">
-            <div>
+            <div className=" flex justify-between items-center mb-1.5 ">
             <h1 className="mb-4 text-3xl">Create New User</h1>
-            {/* <button
+            <div>
+            <button
                     type="button"
                     onClick={() => {
                         // Connect your edit functionality here.
-                        router.replace("/admin/createProject/editProject")
+                        router.replace("/admin/createUser/editUser")
                     }}
                     className="flex items-center p-2.5 rounded-lg gap-1.5 text-xs bg-[#6A5AF7] hover:bg-violet-700"
                     >
-                    Edit Projects
+                    Edit Users
                     <SquarePen size={16} />
-                </button> */}
+                </button>
+            </div>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} noValidate>

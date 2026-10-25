@@ -39,7 +39,6 @@ export default function AdminSignup() {
 
 
   const handleChange = (e) => {
-    setErrorMessage('')
     const { name, value } = e.target;
 
     setFormData((prev) => ({
@@ -72,6 +71,7 @@ export default function AdminSignup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage('')
     if (isLoading) return
     setIsLoading(true)
     try {
@@ -86,14 +86,12 @@ export default function AdminSignup() {
     } catch (error) {
 
       setIsLoading(false)
-
-      setErrorMessage(
-        error.response?.data?.message ||
-        error.message ||
-        "Unable to log in"
-      )
-      console.log(setErrorMessage)
-      showPopup(errorMessage)
+      const message =
+      error.response?.data?.message ||
+      error.message ||
+      "Unable to log in";
+      // console.log(setErrorMessage)
+      showPopup(message)
 
     }
 

@@ -11,6 +11,7 @@ export default function UserList() {
         usersLoading,
         usersError,
     } = useProjectUsers();
+    console.log(users)
 
     // Wait until the logged-in user's role is known
     if (userLoading) {
@@ -22,7 +23,7 @@ export default function UserList() {
     }
 
     // Only superadmins can view the users list
-    if (user?.role !== 'superadmin') {
+    if (!['superadmin','admin'].includes(user?.role)) {
         return null;
     }
 
