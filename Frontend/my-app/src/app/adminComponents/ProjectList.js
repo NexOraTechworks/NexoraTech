@@ -80,7 +80,7 @@ export default function ProjectList() {
                                     </td>
 
                                     <td className="w-1/2 px-3 py-4 text-right text-xs font-medium tracking-wider capitalize sm:px-5">
-                                        {project.short_description}
+                                        {project.tech_stack}
                                     </td>
                                 </tr>
                             ))
