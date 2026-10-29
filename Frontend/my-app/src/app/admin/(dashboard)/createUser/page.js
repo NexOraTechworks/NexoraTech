@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -5,6 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { SquarePen } from "lucide-react";
 import StatusToggle from "@/app/adminComponents/StatusToggle";
+import { ErrorMessage } from "../../../adminComponents/ErrorMessage";
 import { PopUp } from "@/app/components/PopUp";
 import { useRouter } from "next/navigation";
 
@@ -19,46 +21,44 @@ const DEFAULT_VALUES = {
 const VALID_ROLES = ["admin", "superadmin", "viewer"];
 
 export default function Page() {
+    const router = useRouter();
+
     const {
         register,
         handleSubmit,
         reset,
         setValue,
-        setError,
-        clearErrors,
         watch,
         formState: { errors, isSubmitting },
     } = useForm({
         defaultValues: DEFAULT_VALUES,
-        mode: "onBlur",
     });
-    const router = useRouter()
 
-    const [popUp, setPopUp] = useState({
+    const [popup, setPopup] = useState({
         show: false,
-        text: "",
+        message: "",
     });
 
     const status = watch("status");
 
-    // Automatically dismiss the popup and clean up the timer.
+    // Automatically dismiss the popup after 2.5 seconds.
     useEffect(() => {
-        if (!popUp.show) return;
+        if (!popup.show) return;
 
         const timeoutId = setTimeout(() => {
-            setPopUp((current) => ({
+            setPopup((current) => ({
                 ...current,
                 show: false,
             }));
         }, 2500);
 
         return () => clearTimeout(timeoutId);
-    }, [popUp.show, popUp.text]);
+    }, [popup.show, popup.message]);
 
-    const showPopup = (text) => {
-        setPopUp({
+    const showPopup = (message) => {
+        setPopup({
             show: true,
-            text,
+            message,
         });
     };
 
@@ -70,9 +70,6 @@ export default function Page() {
     };
 
     const onSubmit = async (data) => {
-        // Remove stale server errors before a new submission.
-        clearErrors("root.serverError");
-
         const payload = {
             username: data.username.trim(),
             emailId: data.emailId.trim(),
@@ -100,37 +97,15 @@ export default function Page() {
             );
 
             reset(DEFAULT_VALUES);
-            showPopup("User has been created successfully");
-        } catch (err) {
+
+            showPopup("User has been created successfully!");
+        } catch (error) {
             const message =
-                err.response?.data?.message ||
-                err.message ||
-                "Failed to create user. Please try again.";
+                error.response?.data?.message ||
+                error.message ||
+                "Something went wrong. Please try again.";
 
-            const normalizedMessage = message.toLowerCase();
-
-            if (normalizedMessage.includes("username")) {
-                setError("username", {
-                    type: "server",
-                    message,
-                });
-            } else if (
-                normalizedMessage.includes("email") ||
-                normalizedMessage.includes("already exists")
-            ) {
-                setError("emailId", {
-                    type: "server",
-                    message,
-                });
-            } else if (normalizedMessage.includes("password")) {
-                setError("password", {
-                    type: "server",
-                    message,
-                });
-            } else {
-                clearErrors("root.serverError");
-                showPopup(message);
-            }
+            showPopup(message);
         }
     };
 
@@ -138,41 +113,47 @@ export default function Page() {
         "w-full rounded-xl border-2 border-white/10 bg-[#051121] px-4 py-3 text-sm placeholder-slate-600 focus:border-violet-500 focus:outline-none";
 
     const labelClass =
-        "mb-2.5 block font-mon text-xs tracking-tight text-white";
+        "mb-2.5 block font-mono text-xs tracking-tight text-white";
 
-    const renderError = (field) =>
-        errors[field] && (
-            <p className="mt-1 text-xs text-red-400" role="alert">
-                {errors[field].message}
-            </p>
-        );
+    // Use the same custom error component as Create Project.
+    const renderError = (field) => (
+        <div className="min-h-5 mt-1">
+            {errors[field] && (
+                <ErrorMessage message={errors[field].message} />
+            )}
+        </div>
+    );
 
     return (
         <div className="mt-11">
-            <div className=" flex justify-between items-center mb-1.5 ">
-            <h1 className="mb-4 text-3xl">Create New User</h1>
-            <div>
-            <button
+            {/* Page heading */}
+            <div className="mb-1.5 flex items-center justify-between gap-4">
+                <h1 className="mb-4 text-3xl">Create New User</h1>
+
+                <button
                     type="button"
-                    onClick={() => {
-                        // Connect your edit functionality here.
+                    onClick={() =>
                         router.replace("/admin/createUser/editUser")
-                    }}
-                    className="flex items-center p-2.5 rounded-lg gap-1.5 text-xs bg-[#6A5AF7] hover:bg-violet-700"
-                    >
+                    }
+                    className="flex shrink-0 items-center gap-1.5 rounded-lg bg-[#6A5AF7] p-2.5 text-xs transition-colors hover:bg-violet-700"
+                >
                     Edit Users
                     <SquarePen size={16} />
                 </button>
             </div>
-            </div>
 
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div className="flex flex-col gap-4 lg:flex-row">
+
                     {/* User Details */}
                     <div className="grid w-full max-w-3xl gap-4 rounded-lg bg-[#051121] px-6 py-4">
+
                         {/* Username */}
                         <div>
-                            <label htmlFor="username" className={labelClass}>
+                            <label
+                                htmlFor="username"
+                                className={labelClass}
+                            >
                                 User Name
                             </label>
 
@@ -182,13 +163,13 @@ export default function Page() {
                                 autoComplete="off"
                                 placeholder="John Doe"
                                 aria-invalid={!!errors.username}
+                                className={inputClass}
                                 {...register("username", {
                                     required: "Username is required",
                                     validate: (value) =>
                                         value.trim().length >= 2 ||
                                         "Username must have at least 2 characters",
                                 })}
-                                className={inputClass}
                             />
 
                             {renderError("username")}
@@ -196,7 +177,10 @@ export default function Page() {
 
                         {/* Email */}
                         <div>
-                            <label htmlFor="emailId" className={labelClass}>
+                            <label
+                                htmlFor="emailId"
+                                className={labelClass}
+                            >
                                 Email
                             </label>
 
@@ -206,14 +190,15 @@ export default function Page() {
                                 autoComplete="email"
                                 placeholder="john@example.com"
                                 aria-invalid={!!errors.emailId}
+                                className={inputClass}
                                 {...register("emailId", {
                                     required: "Email is required",
                                     validate: (value) =>
                                         /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
                                             value.trim()
-                                        ) || "Enter a valid email address",
+                                        ) ||
+                                        "Enter a valid email address",
                                 })}
-                                className={inputClass}
                             />
 
                             {renderError("emailId")}
@@ -221,24 +206,29 @@ export default function Page() {
 
                         {/* Role */}
                         <div>
-                            <label htmlFor="role" className={labelClass}>
+                            <label
+                                htmlFor="role"
+                                className={labelClass}
+                            >
                                 User Role
                             </label>
 
                             <select
                                 id="role"
                                 aria-invalid={!!errors.role}
+                                className={`${inputClass} text-gray-300`}
                                 {...register("role", {
                                     required: "Please select a user role",
                                     validate: (value) =>
                                         VALID_ROLES.includes(value) ||
                                         "Select a valid user role",
                                 })}
-                                className={`${inputClass} text-gray-300`}
                             >
                                 <option value="">Select user role</option>
                                 <option value="admin">Admin</option>
-                                <option value="superadmin">Super admin</option>
+                                <option value="superadmin">
+                                    Super admin
+                                </option>
                                 <option value="viewer">Viewer</option>
                             </select>
 
@@ -247,7 +237,10 @@ export default function Page() {
 
                         {/* Password */}
                         <div>
-                            <label htmlFor="password" className={labelClass}>
+                            <label
+                                htmlFor="password"
+                                className={labelClass}
+                            >
                                 Password
                             </label>
 
@@ -257,6 +250,7 @@ export default function Page() {
                                 autoComplete="new-password"
                                 placeholder="Enter Password"
                                 aria-invalid={!!errors.password}
+                                className={inputClass}
                                 {...register("password", {
                                     required: "Password is required",
                                     minLength: {
@@ -268,21 +262,10 @@ export default function Page() {
                                         value.trim().length > 0 ||
                                         "Password cannot contain only spaces",
                                 })}
-                                className={inputClass}
                             />
 
                             {renderError("password")}
                         </div>
-
-                        {/* General Backend Error */}
-                        {errors.root?.serverError && (
-                            <p
-                                className="text-sm text-red-400"
-                                role="alert"
-                            >
-                                {errors.root.serverError.message}
-                            </p>
-                        )}
                     </div>
 
                     {/* Account Status */}
@@ -310,9 +293,10 @@ export default function Page() {
                     </div>
                 </div>
 
+                {/* Success and backend error popup */}
                 <PopUp
-                    show={popUp.show}
-                    text={popUp.text}
+                    show={popup.show}
+                    text={popup.message}
                 />
             </form>
         </div>

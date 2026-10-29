@@ -45,7 +45,19 @@ export function ProfileOpt({username}) {
             </div>
             <div className={`absolute ${toggle?"opacity-100 pointer-events-auto":"opacity-0 -translate-y-6 pointer-events-none"} transition-all duration-200 bg-[#020B18] border border-[#1A2A48] right-3 p-2 top-15 rounded-lg  flex-1 flex items-center justify-end  pb-5 `} >
         
-            <button onClick={logOut} disabled={loading} className=" flex items-center  gap-2  text-muted text-sm   hover:text-red-600 p-3  rounded-2xl transition-colors " >
+            <button onClick={logOut} disabled={loading} 
+           className="
+           flex w-full items-center gap-3
+           rounded-lg px-3 py-2.5
+           text-sm 
+           transition-colors duration-200
+           hover:bg-red-500/10
+          text-red-400
+           focus-visible:outline-none
+           focus-visible:ring-2
+           focus-visible:ring-violet-500
+         " 
+            >
             <LogOut size={16} />
             {loading ? "Logging out.." : "Logout"}
           </button>

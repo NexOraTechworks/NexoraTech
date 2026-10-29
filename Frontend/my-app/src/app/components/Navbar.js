@@ -13,9 +13,9 @@ export function Navbar(){
            </a>
             <div className=" hidden md:flex justify-between gap-4    items-center space-x-1 font-mon text-xs   " >
             {/* <a href="" className="  text-muted hover:text-slate-800  dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl " >Overview</a> */}
-            <a href="#projects" className="  text-muted   dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-slate-800 " >Projects</a>
-            <a href="#stack" className="  text-muted  dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-slate-800 " >Stack</a>
-            <a href="#contact" className="  text-muted   dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl transition-colors hover:text-slate-800 " >Contact</a>
+            <a href="#projects" className="  text-muted   dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-emerald  " >Projects</a>
+            <a href="#stack" className="  text-muted  dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-emerald " >Stack</a>
+            <a href="#contact" className="  text-muted   dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl transition-colors hover:text-emerald " >Contact</a>
 
             </div>
             <div className=" flex items-center gap-1.5 ">

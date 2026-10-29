@@ -80,7 +80,7 @@ useEffect(() => {
                   tools={data.tech_stack}
                   description={data.short_description}
                 />)) : (
-              <div className="col-span-full flex min-h-[280px] flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/[0.02] px-6 py-12 text-center">
+              <div className="col-span-full flex min-h-[280px] flex-col items-center justify-center rounded-2xl border border-dashed dark:border-white/10 border-white/5 dark:shadow-none shadow bg-light dark:bg-white/[0.02] px-6 py-12 text-center">
 
                 <div className="mb-5 flex size-14 items-center justify-center rounded-2xl border border-violet-400/20 bg-violet-500/10">
                   <FolderOpen
@@ -90,7 +90,7 @@ useEffect(() => {
                   />
                 </div>
 
-                <h2 className="text-lg font-semibold tracking-tight text-white">
+                <h2 className="text-lg font-semibold tracking-tight text-black dark:text-white">
                   Nothing to showcase — yet.
                 </h2>
 
