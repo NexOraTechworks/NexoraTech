@@ -8,14 +8,14 @@ export function ProjectCard({ title, description, tools, onView, image }) {
       <div className="glass-bento border border-graphite shadow rounded-2xl p-8 group h-full flex flex-col">
 
         {/* Fixed-height image */}
-        <div className="border border-white/10 overflow-hidden rounded-2xl relative h-52 shrink-0">
+        <div className="border border-white/10 overflow-hidden rounded-2xl relative h-96 shrink-0">
           <span className="absolute left-5 top-5 z-20 rounded-full border border-white/10 bg-onyx px-3 py-1 text-xs font-medium text-violet-300">
             Cloud / System
           </span>
 
           <img
             alt={title || "Nexora project"}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-fill group-hover:scale-105 transition-transform duration-500"
             src={image}
           />
         </div>
