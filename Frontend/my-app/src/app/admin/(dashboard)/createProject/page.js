@@ -163,33 +163,19 @@ export default function Page() {
         formData.append("project_image", data.project_image[0]);
 
         try {
-            const backendUrl =
-                process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/+$/, "");
-
-            if (!backendUrl) {
-                throw new Error(
-                    "Backend URL is missing. Check your .env.local file."
-                );
-            }
-
-            await axios.post(
-                `${backendUrl}/projects`,
-                formData,
-                {
-                    withCredentials: true,
-                }
-            );
-
+            await axios.post("/api/auth/projects", formData);
+        
             reset(DEFAULT_VALUES);
             setImagePreview("");
-
+        
             showPopup("Project added successfully!");
+        
         } catch (error) {
             const message =
                 error.response?.data?.message ||
                 error.message ||
                 "Something went wrong. Please try again.";
-
+        
             showPopup(message);
         }
     };
