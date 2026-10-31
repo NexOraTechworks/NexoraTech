@@ -9,11 +9,14 @@ import {
     useCallback,
 } from 'react';
 
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 const ProjectUserContext = createContext(null);
 
 export function ProjectUserProvider({ children }) {
+    const router = useRouter();
+
     const [projects, setProjects] = useState([]);
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState(null);
@@ -26,7 +29,23 @@ export function ProjectUserProvider({ children }) {
     const [usersError, setUsersError] = useState('');
     const [userError, setUserError] = useState('');
     const [deleteProjectError, setDeleteProjectError] = useState('');
-    const [deleteUserError,setDeleteUserError] = useState('')
+    const [deleteUserError, setDeleteUserError] = useState('');
+
+    // Handle expired or deleted user sessions
+    const handleSessionExpiry = useCallback(async () => {
+        setUser(null);
+        setUsers([]);
+        setProjects([]);
+
+        try {
+            await axios.post('/api/auth/logout');
+        } catch (error) {
+            console.error('Failed to clear authentication cookie:', error);
+        } finally {
+            router.replace('/admin/login');
+            router.refresh();
+        }
+    }, [router]);
 
     // Fetch projects
     const fetchProjects = useCallback(async () => {
@@ -70,7 +89,6 @@ export function ProjectUserProvider({ children }) {
                 { withCredentials: true }
             );
 
-            // Update the UI after successful deletion
             setProjects((prevProjects) =>
                 prevProjects.filter(
                     (project) => project.id !== id
@@ -98,10 +116,8 @@ export function ProjectUserProvider({ children }) {
         try {
             setUserError('');
 
-            const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/me`,
-                { withCredentials: true }
-            );
+            // Use Next.js proxy instead of calling Render directly
+            const response = await axios.get('/api/auth/me');
 
             const fetchedUser =
                 response.data?.data ?? response.data?.user;
@@ -111,26 +127,31 @@ export function ProjectUserProvider({ children }) {
             }
 
             setUser(fetchedUser);
+
         } catch (error) {
             console.error('Failed to fetch logged-in user:', error);
 
             setUser(null);
+
+            if (error.response?.status === 401) {
+                await handleSessionExpiry();
+                return;
+            }
 
             setUserError(
                 error.response?.data?.message ||
                 error.message ||
                 'Unable to fetch logged-in user'
             );
+
         } finally {
             setUserLoading(false);
         }
-    }, []);
+    }, [handleSessionExpiry]);
 
-    // Fetch users only for superadmins
+    // Fetch users based on role
     const fetchUsers = useCallback(async () => {
         if (!['admin', 'superadmin'].includes(user?.role)) {
-        
-    
             setUsers([]);
             setUsersError('');
             setUsersLoading(false);
@@ -146,7 +167,6 @@ export function ProjectUserProvider({ children }) {
                 `${process.env.NEXT_PUBLIC_BACKEND_URL}/users`,
                 { withCredentials: true }
             );
-            console.log(response)
 
             const fetchedUsers = response.data?.data;
 
@@ -155,6 +175,7 @@ export function ProjectUserProvider({ children }) {
             }
 
             setUsers(fetchedUsers);
+
         } catch (error) {
             console.error('Failed to fetch users:', error);
 
@@ -163,31 +184,40 @@ export function ProjectUserProvider({ children }) {
                 error.message ||
                 'Unable to fetch users'
             );
+
         } finally {
             setUsersLoading(false);
         }
     }, [user?.role]);
-    const deleteUser = useCallback(async(id)=>{
-       
-            try{
-                setDeleteUserError('')
-                await axios.delete( `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${id}`,{withCredentials:true})
-                setUsers((user)=>
-                    user.filter((curr)=>curr.id !== id)
-                )
-               return true
-            }catch (error) {
-                console.error('Failed to delete User:', error);
-    
-                setDeleteUserError(
-                    error.response?.data?.message ||
-                    error.message ||
-                    'Unable to delete User'
-                );
-    
-                return false;
-            }
-    },[])
+
+    // Delete user
+    const deleteUser = useCallback(async (id) => {
+        try {
+            setDeleteUserError('');
+
+            await axios.delete(
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${id}`,
+                { withCredentials: true }
+            );
+
+            setUsers((prevUsers) =>
+                prevUsers.filter((curr) => curr.id !== id)
+            );
+
+            return true;
+
+        } catch (error) {
+            console.error('Failed to delete User:', error);
+
+            setDeleteUserError(
+                error.response?.data?.message ||
+                error.message ||
+                'Unable to delete User'
+            );
+
+            return false;
+        }
+    }, []);
 
     // Initial fetch
     useEffect(() => {
@@ -195,12 +225,12 @@ export function ProjectUserProvider({ children }) {
         fetchMe();
     }, [fetchProjects, fetchMe]);
 
-    // Run after the logged-in user's authentication check finishes
+    // Fetch users after authentication
     useEffect(() => {
-        if (userLoading) return;
+        if (userLoading || !user) return;
 
         fetchUsers();
-    }, [userLoading, fetchUsers]);
+    }, [userLoading, user, fetchUsers]);
 
     return (
         <ProjectUserContext.Provider
