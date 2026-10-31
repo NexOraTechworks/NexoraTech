@@ -28,11 +28,7 @@ const fetchProject = useCallback(async () => {
   setLoading(true);
 
   try {
-    const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/projects`;
-
-    const response = await axios.get(apiUrl, {
-      withCredentials: true,
-    });
+    const response = await axios.get("/api/auth/projects");
 
     setProjects(response.data.data);
   } catch (error) {

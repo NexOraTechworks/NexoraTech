@@ -54,10 +54,7 @@ export function ProjectUserProvider({ children }) {
         try {
             setProjectsError('');
 
-            const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/projects`,
-                { withCredentials: true }
-            );
+            const response = await axios.get("/api/auth/projects");
 
             const fetchedProjects = response.data?.data;
 
@@ -84,10 +81,9 @@ export function ProjectUserProvider({ children }) {
         try {
             setDeleteProjectError('');
 
-            await axios.delete(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/projects/${id}`,
-                { withCredentials: true }
-            );
+           await axios.delete(
+                `/api/auth/projects/${id}`
+              );
 
             setProjects((prevProjects) =>
                 prevProjects.filter(
@@ -163,7 +159,7 @@ export function ProjectUserProvider({ children }) {
         try {
             setUsersError('');
 
-            const response = axios.get("/api/users");
+            const response = axios.get("/api/auth/users");
             const fetchedUsers = response.data?.data;
 
             if (!Array.isArray(fetchedUsers)) {
@@ -192,9 +188,8 @@ export function ProjectUserProvider({ children }) {
             setDeleteUserError('');
 
             await axios.delete(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${id}`,
-                { withCredentials: true }
-            );
+                `/api/auth/users/${id}`
+              );
 
             setUsers((prevUsers) =>
                 prevUsers.filter((curr) => curr.id !== id)
