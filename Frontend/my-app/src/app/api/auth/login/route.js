@@ -5,8 +5,9 @@ export async function POST(request) {
     try {
         const body = await request.json();
 
-        const backendResponse = await fetch(
-            `${process.env.BACKEND_URL}/login`,
+        // Forward login request to Express backend
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`,
             {
                 method: "POST",
                 headers: {
@@ -16,33 +17,46 @@ export async function POST(request) {
             }
         );
 
-        const data = await backendResponse.json();
+        const data = await response.json();
 
-        if (!backendResponse.ok) {
+        // Handle backend login errors
+        if (!response.ok) {
             return NextResponse.json(data, {
-                status: backendResponse.status,
+                status: response.status,
             });
         }
 
-        const cookies = backendResponse.headers.getSetCookie();
-        const tokenCookie = cookies.find(cookie =>
+        // Get individual cookies from backend response
+        const cookies = response.headers.getSetCookie();
+
+        // Find the authentication token cookie
+        const tokenCookie = cookies.find((cookie) =>
             cookie.startsWith("token=")
         );
 
         if (!tokenCookie) {
             return NextResponse.json(
-                { message: "Login succeeded, but no authentication cookie was received." },
+                { message: "Authentication cookie missing" },
                 { status: 500 }
             );
         }
 
+        // Extract JWT from cookie
         const token = tokenCookie
             .split(";")[0]
             .substring("token=".length);
 
-        const response = NextResponse.json(data);
+        if (!token) {
+            return NextResponse.json(
+                { message: "Authentication token missing" },
+                { status: 500 }
+            );
+        }
 
-        response.cookies.set("token", token, {
+        // Create response and set cookie on Vercel domain
+        const result = NextResponse.json(data);
+
+        result.cookies.set("token", decodeURIComponent(token), {
             httpOnly: true,
             secure: true,
             sameSite: "lax",
@@ -50,13 +64,13 @@ export async function POST(request) {
             maxAge: 7 * 24 * 60 * 60,
         });
 
-        return response;
+        return result;
 
     } catch (error) {
         console.error("Login proxy error:", error);
 
         return NextResponse.json(
-            { message: "Unable to connect to backend." },
+            { message: "Unable to connect to authentication server" },
             { status: 500 }
         );
     }
