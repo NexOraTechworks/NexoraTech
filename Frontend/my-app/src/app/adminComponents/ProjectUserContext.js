@@ -159,7 +159,7 @@ export function ProjectUserProvider({ children }) {
         try {
             setUsersError('');
 
-            const response = axios.get("/api/auth/users");
+            const response = await axios.get("/api/auth/users");
             const fetchedUsers = response.data?.data;
 
             if (!Array.isArray(fetchedUsers)) {
