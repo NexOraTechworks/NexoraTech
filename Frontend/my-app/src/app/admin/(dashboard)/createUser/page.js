@@ -88,13 +88,7 @@ export default function Page() {
                 );
             }
 
-            await axios.post(
-                `${backendUrl}/create-user`,
-                payload,
-                {
-                    withCredentials: true,
-                }
-            );
+            await axios.post("/api/auth/create-user", payload);
 
             reset(DEFAULT_VALUES);
 
