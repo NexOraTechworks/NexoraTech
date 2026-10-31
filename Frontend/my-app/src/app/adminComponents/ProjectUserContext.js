@@ -163,11 +163,7 @@ export function ProjectUserProvider({ children }) {
         try {
             setUsersError('');
 
-            const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/users`,
-                { withCredentials: true }
-            );
-
+            const response = axios.get("/api/users");
             const fetchedUsers = response.data?.data;
 
             if (!Array.isArray(fetchedUsers)) {
