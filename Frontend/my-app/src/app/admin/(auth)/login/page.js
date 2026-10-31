@@ -66,36 +66,30 @@ export default function AdminSignup() {
         show: true,
         message,
     });
-};
+}
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setErrorMessage("");
 
+  if (isLoading) return;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMessage('')
-    if (isLoading) return
-    setIsLoading(true)
-    try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`,
-        formData,
-        { withCredentials: true }
-      );
+  setIsLoading(true);
 
+  try {
+      await axios.post("/api/auth/login", formData);
 
       router.push("/admin");
-    } catch (error) {
-
-      setIsLoading(false)
+  } catch (error) {
       const message =
-      error.response?.data?.message ||
-      error.message ||
-      "Unable to log in";
-      // console.log(setErrorMessage)
-      showPopup(message)
+          error.response?.data?.message ||
+          error.message ||
+          "Unable to log in";
 
-    }
-
-  };
+      showPopup(message);
+  } finally {
+      setIsLoading(false);
+  }
+};
   const inputClass =
     "w-full rounded-xl border border-white/[0.09] bg-[#0D1016] py-3 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-emerald-400/60 focus:ring-2 focus:ring-emerald-400/10";
 
