@@ -29,7 +29,7 @@ export function Stack(){
     },
   ];
   return (
-    <section id="stack" className="  border-t py-24 border-white/5 max-w-6xl mx-auto px-6  ">
+    <section id="stack" className="   border-t py-24 border-white/5 max-w-6xl mx-auto px-6  ">
         <div>
         <div className=" mb-5 " >
                     <span className="text-emerald-light font-bold tracking-widest uppercase text-xs mb-3 block " >
