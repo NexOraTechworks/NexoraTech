@@ -36,7 +36,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-white/[0.08] bg-[#08090C] text-white">
+    <footer className="relative overflow-hidden border-t border-white/8 bg-[#08090C] text-white">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-24 left-1/4 h-40 w-72 rounded-full bg-[#7763F9]/[0.07] blur-[90px]"
