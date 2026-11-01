@@ -8,20 +8,17 @@ export async function GET() {
         const cookieStore = await cookies();
         const token = cookieStore.get("token")?.value;
 
-        if (!token) {
-            return NextResponse.json(
-                { message: "Authentication token is required" },
-                { status: 401 }
-            );
-        }
+        // if (!token) {
+        //     return NextResponse.json(
+        //         { message: "Authentication token is required" },
+        //         { status: 401 }
+        //     );
+        // }
 
         const response = await fetch(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/projects`,
             {
                 method: "GET",
-                headers: {
-                    Cookie: `token=${token}`,
-                },
                 cache: "no-store",
             }
         );

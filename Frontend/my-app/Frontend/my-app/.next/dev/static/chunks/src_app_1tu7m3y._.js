@@ -451,7 +451,7 @@ _c1 = LinkedinIcon;
 function Footer() {
     const currentYear = new Date().getFullYear();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
-        className: "relative overflow-hidden border-t border-white/[0.08] bg-[#08090C] text-white",
+        className: "relative overflow-hidden border-t border-white/8 bg-[#08090C] text-white",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 "aria-hidden": "true",
@@ -856,34 +856,34 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 function ProjectCard({ title, description, tools, onView, image }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "h-full",
+        className: "w-full min-w-0 h-full",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "glass-bento border border-graphite shadow rounded-2xl p-8 group h-full flex flex-col",
+            className: "glass-bento w-full min-w-0 border border-graphite shadow rounded-2xl p-5 sm:p-8 group h-full flex flex-col",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "border border-white/10 overflow-hidden rounded-2xl relative h-96 shrink-0",
+                    className: "border border-white/10 overflow-hidden rounded-2xl relative h-64 sm:h-96 shrink-0",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             className: "absolute left-5 top-5 z-20 rounded-full border border-white/10 bg-onyx px-3 py-1 text-xs font-medium text-violet-300",
                             children: "Cloud / System"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/ProjectCard.js",
-                            lineNumber: 12,
+                            lineNumber: 13,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                             alt: title || "Nexora project",
-                            className: "w-full h-full object-fill group-hover:scale-105 transition-transform duration-500",
+                            className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500",
                             src: image
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/ProjectCard.js",
-                            lineNumber: 16,
+                            lineNumber: 17,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/ProjectCard.js",
-                    lineNumber: 11,
+                    lineNumber: 12,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -891,7 +891,7 @@ function ProjectCard({ title, description, tools, onView, image }) {
                     children: title
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ProjectCard.js",
-                    lineNumber: 24,
+                    lineNumber: 25,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -899,7 +899,7 @@ function ProjectCard({ title, description, tools, onView, image }) {
                     children: description
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ProjectCard.js",
-                    lineNumber: 28,
+                    lineNumber: 30,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -913,12 +913,12 @@ function ProjectCard({ title, description, tools, onView, image }) {
                                         children: data
                                     }, index, false, {
                                         fileName: "[project]/src/app/components/ProjectCard.js",
-                                        lineNumber: 37,
+                                        lineNumber: 40,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ProjectCard.js",
-                                lineNumber: 35,
+                                lineNumber: 38,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -930,35 +930,35 @@ function ProjectCard({ title, description, tools, onView, image }) {
                                         size: 16
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ProjectCard.js",
-                                        lineNumber: 46,
+                                        lineNumber: 49,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/ProjectCard.js",
-                                lineNumber: 41,
+                                lineNumber: 44,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/ProjectCard.js",
-                        lineNumber: 34,
+                        lineNumber: 36,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ProjectCard.js",
-                    lineNumber: 33,
+                    lineNumber: 35,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/components/ProjectCard.js",
-            lineNumber: 8,
+            lineNumber: 9,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/components/ProjectCard.js",
-        lineNumber: 7,
+        lineNumber: 8,
         columnNumber: 5
     }, this);
 }
@@ -1127,10 +1127,7 @@ function Projects() {
             setErrorMessage("");
             setLoading(true);
             try {
-                const apiUrl = `${("TURBOPACK compile-time value", "http://localhost:7070")}/projects`;
-                const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(apiUrl, {
-                    withCredentials: true
-                });
+                const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get("/api/auth/projects");
                 setProjects(response.data.data);
             } catch (error) {
                 console.log("Error fetching projects:", error);
@@ -1155,7 +1152,7 @@ function Projects() {
             isLoading: loading
         }, void 0, false, {
             fileName: "[project]/src/app/components/Projects.js",
-            lineNumber: 58,
+            lineNumber: 54,
             columnNumber: 7
         }, this);
     }
@@ -1169,14 +1166,14 @@ function Projects() {
                     children: "// Project"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/Projects.js",
-                    lineNumber: 67,
+                    lineNumber: 63,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: " grid grid-cols-1 relative  md:grid-cols-2 gap-6",
                     children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Loader$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                         fileName: "[project]/src/app/components/Projects.js",
-                        lineNumber: 71,
+                        lineNumber: 67,
                         columnNumber: 22
                     }, this) : projects.length > 0 ? projects.map((data, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ProjectCard$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ProjectCard"], {
                             onView: ()=>handleOpen(data),
@@ -1186,7 +1183,7 @@ function Projects() {
                             description: data.short_description
                         }, index, false, {
                             fileName: "[project]/src/app/components/Projects.js",
-                            lineNumber: 75,
+                            lineNumber: 71,
                             columnNumber: 17
                         }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "col-span-full flex min-h-[280px] flex-col items-center justify-center rounded-2xl border border-dashed dark:border-white/10 border-white/5 dark:shadow-none shadow bg-light dark:bg-white/[0.02] px-6 py-12 text-center",
@@ -1199,12 +1196,12 @@ function Projects() {
                                     strokeWidth: 1.6
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/Projects.js",
-                                    lineNumber: 86,
+                                    lineNumber: 82,
                                     columnNumber: 19
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/Projects.js",
-                                lineNumber: 85,
+                                lineNumber: 81,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1212,7 +1209,7 @@ function Projects() {
                                 children: "Nothing to showcase — yet."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/Projects.js",
-                                lineNumber: 93,
+                                lineNumber: 89,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1220,7 +1217,7 @@ function Projects() {
                                 children: "The next great project could go here. Check back soon to explore what we’re building."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/Projects.js",
-                                lineNumber: 97,
+                                lineNumber: 93,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1230,25 +1227,25 @@ function Projects() {
                                         className: "size-1.5 rounded-full bg-violet-400"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/Projects.js",
-                                        lineNumber: 103,
+                                        lineNumber: 99,
                                         columnNumber: 19
                                     }, this),
                                     "Portfolio currently empty"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/Projects.js",
-                                lineNumber: 102,
+                                lineNumber: 98,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/Projects.js",
-                        lineNumber: 83,
+                        lineNumber: 79,
                         columnNumber: 15
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/Projects.js",
-                    lineNumber: 70,
+                    lineNumber: 66,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ProjectDetails$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ProjectDetails"], {
@@ -1257,18 +1254,18 @@ function Projects() {
                     onClose: handleClose
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/Projects.js",
-                    lineNumber: 113,
+                    lineNumber: 109,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/components/Projects.js",
-            lineNumber: 66,
+            lineNumber: 62,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/components/Projects.js",
-        lineNumber: 65,
+        lineNumber: 61,
         columnNumber: 5
     }, this);
 }
