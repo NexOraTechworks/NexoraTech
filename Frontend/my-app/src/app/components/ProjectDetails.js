@@ -19,7 +19,7 @@ export function ProjectDetails({ project, onClose, isOpen }) {
         }`}
       >
         {project && (
-          <div className="flex h-full flex-col">
+          <div className="flex h-full overflow-y-scroll flex-col">
             <div>
               <h2 className="mb-4 text-2xl font-syne dark:text-white text-charcoal tracking-tight">
                 {project.project_name}
@@ -43,7 +43,7 @@ export function ProjectDetails({ project, onClose, isOpen }) {
               </ul>
             </div>
 
-            <div className="flex flex-1 items-end">
+            <div className="flex flex-1 mt-2 items-end">
               <button
                 onClick={onClose}
                 className="rounded-2xl bg-white/5 px-6 py-2 text-sm font-mon hover:bg-white/10"
