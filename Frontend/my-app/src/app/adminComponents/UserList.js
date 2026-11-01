@@ -11,7 +11,7 @@ export default function UserList() {
         usersLoading,
         usersError,
     } = useProjectUsers();
-    console.log(users)
+    // console.log(users)
 
     // Wait until the logged-in user's role is known
     if (userLoading) {

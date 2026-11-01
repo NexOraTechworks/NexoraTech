@@ -161,7 +161,6 @@ export function ProjectUserProvider({ children }) {
 
             const response = await axios.get("/api/auth/users");
             const fetchedUsers = response.data?.data;
-
             if (!Array.isArray(fetchedUsers)) {
                 throw new Error('Invalid users response');
             }

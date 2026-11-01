@@ -18,8 +18,8 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import Loader from "@/app/components/Loader";
 import { PopUp } from "@/app/components/PopUp";
+import AuthLoader from "@/app/components/AuthLoader";
 
 export default function AdminSignup() {
   const [status, setStatus] = useState(null);
@@ -98,7 +98,7 @@ const handleSubmit = async (e) => {
       {/* Background effects */}
 
 
-      {isLoading ? <Loader /> :
+      {isLoading ? <AuthLoader/> :
         <div className="relative z-10 flex justify-center   w-full max-w-xl overflow-hidden rounded-3xl border bg-light  glass-bento shadow-2xl backdrop-blur-2xl lg:grid-cols-2">
 
           <section className="p-6 sm:p-10 lg:p-12">
