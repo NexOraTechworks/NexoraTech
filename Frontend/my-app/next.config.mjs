@@ -19,8 +19,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: 'localhost',
-        port: '7070',
+        hostname: 'nexora-web-backend-s0y5.onrender.com',
+        // port: '7070',
         pathname: '/uploads/**',
       },
     ],

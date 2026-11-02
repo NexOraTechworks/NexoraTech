@@ -6,49 +6,62 @@ import { ChevronRight } from "lucide-react";
 export function ProjectCard({ title, description, tools, onView, image }) {
   return (
     <div className="w-full min-w-0 h-full">
-      <div className="glass-bento w-full min-w-0 border border-graphite shadow rounded-2xl p-5 sm:p-8 group h-full flex flex-col">
+      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-violet-500/20 bg-gradient-to-br from-violet-500/[0.09] via-[#12141A]/95 to-indigo-500/[0.05] backdrop-blur-xl transition-all duration-300 hover:border-violet-400/40 hover:shadow-[0_0_35px_rgba(119,99,249,0.13)]">
 
         {/* Project image */}
-        <div className="border border-white/10 overflow-hidden rounded-2xl relative h-64 sm:h-96 shrink-0">
-          <span className="absolute left-5 top-5 z-20 rounded-full border border-white/10 bg-onyx px-3 py-1 text-xs font-medium text-violet-300">
+        <div className="relative h-64 sm:h-72 shrink-0 overflow-hidden">
+
+          <span className="absolute left-5 top-5 z-20 rounded-full border border-violet-400/20 bg-[#08090C]/80 px-3 py-1 text-xs font-medium text-violet-300 backdrop-blur-md">
             Cloud / System
           </span>
 
           <img
             alt={title || "Nexora project"}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            src={image}
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            src={image||null}
           />
+
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-indigo-950/40 via-transparent to-violet-500/[0.05]" />
         </div>
 
-        {/* Project title */}
-        <h2 className="text-2xl font-syne tracking-tight mt-6 line-clamp-2 min-h-16 group-hover:text-emerald transition-all duration-500">
-          {title}
-        </h2>
+        {/* Project content */}
+        <div className="flex flex-1 flex-col p-5 sm:p-6">
 
-        {/* Description */}
-        <p className="text-slate-400 text-sm mt-1.5 font-light leading-relaxed line-clamp-3 min-h-[4.5rem]">
-          {description}
-        </p>
+          <h2 className="mt-1 line-clamp-2 min-h-16 font-syne text-2xl tracking-tight text-white transition-colors duration-300 group-hover:text-violet-300">
+            {title}
+          </h2>
 
-        {/* Footer */}
-        <div className="border-t border-white/10 pt-6 mt-auto">
-          <div className="flex md:flex-row flex-col items-center justify-between gap-4">
+          <p className="mt-1.5 line-clamp-3 min-h-[4.5rem] text-sm font-light leading-relaxed text-slate-400">
+            {description}
+          </p>
 
-            <ul className="flex flex-wrap gap-3 text-xs font-mon text-slate-400">
-              {(tools || []).slice(0, 3).map((data, index) => (
-                <li key={index}>{data}</li>
-              ))}
-            </ul>
+          {/* Footer */}
+          <div className="mt-auto border-t border-violet-500/10 pt-5">
+            <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
 
-            <button
-              onClick={onView}
-              className="w-full justify-center md:w-max shrink-0 flex items-center gap-1 text-xs font-mon hover:text-emerald transition-all dark:text-white text-charcoal"
-            >
-              Detailed case
-              <ChevronRight size={16} />
-            </button>
+              <ul className="flex flex-wrap gap-3 font-mon text-xs text-slate-400">
+                {(tools || []).slice(0, 3).map((data, index) => (
+                  <li
+                    key={index}
+                    className="rounded-full border border-violet-500/15 bg-violet-500/[0.06] px-3 py-1.5"
+                  >
+                    {data}
+                  </li>
+                ))}
+              </ul>
 
+              <button
+                onClick={onView}
+                className="flex w-full shrink-0 items-center justify-center gap-1 text-xs font-mon text-white transition-colors duration-300 hover:text-violet-300 md:w-max"
+              >
+                Detailed case
+                <ChevronRight
+                  size={16}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </button>
+
+            </div>
           </div>
         </div>
 
