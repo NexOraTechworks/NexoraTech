@@ -1,25 +1,63 @@
+import Image from "next/image";
+import React from "react";
 
-import { SquareText } from "lucide-react";
+export function Card({
+  title,
+  description,
+  pills = [],
+  tech,
+  icon,
+  iconBoxClass = "border-cyan-500/20 bg-cyan-500/10 text-cyan-400",
+  borderAccent = "border-l-emerald-500",
+  hoverGlow = "hover:border-emerald-500/40 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]",
+}) {
+  // Support both an array of pills or a comma-separated tech string
+  const pillList =
+    Array.isArray(pills) && pills.length > 0
+      ? pills
+      : typeof tech === "string"
+        ? tech.split(",").map((t) => t.trim()).filter(Boolean)
+        : [];
 
-export function Card({ title, tech, hover, color }) {
   return (
     <div className="h-full min-w-0">
       <div
-        className={`h-full min-h-[220px] dark:bg-transparent bg-light
-        backdrop-blur-2xl border dark:border-white/10 border-graphite
-        shadow transition-colors rounded-2xl p-6 flex flex-col ${hover}`}
+        className={`group relative flex h-full max-w-lg  flex-col  overflow-hidden rounded-2xl border border-white/[0.08]  border-l-[1px] bg-gradient-to-br from-[#0F1423]/95 via-[#0A0D17]/95 ${borderAccent} to-[#080B12] py-4 px-6 backdrop-blur-xl transition-all duration-300 ${hoverGlow}`}
       >
-        <div className="mb-4">
-          <SquareText className={color} />
+        {/* Top: Icon + Title & Description */}
+        <div className="flex items-start gap-4">
+          {/* Icon Box */}
+          <div
+            className={`flex size-15 shrink-0 items-center justify-center rounded-2xl border p-2.5 transition-transform duration-300 group-hover:scale-105 ${iconBoxClass}`}
+          >
+            <Image width={25} height={25} alt="myimg" src={icon}/>
+            {/* <img  src="https://zonalogo.com/assets/docker-logo.webp?asset=1349&w=320" /> */}
+          </div>
+
+          {/* Title & Description */}
+          <div className="min-w-0 flex-1 pt-0.5">
+            <h3 className="font-syne text-base font-semibold tracking-tight text-white transition-colors duration-200">
+              {title}
+            </h3>
+            {description && (
+              <p className="mt-1 text-xs font-light leading-relaxed text-slate-400">
+                {description}
+              </p>
+            )}
+          </div>
         </div>
 
-        <h2 className="text-lg font-syne dark:text-white text-charcoal">
-          {title}
-        </h2>
-
-        <p className="text-slate-400 text-xs mt-1.5 font-light leading-relaxed">
-          {tech}
-        </p>
+        {/* Bottom: Tech Pills */}
+        <div className="mt-6 flex items-center   gap-2 pt-2">
+          {pillList.map((tool, index) => (
+            <span
+              key={index}
+              className="rounded-full border border-white/[0.08] bg-[#111625] px-2 py-1.5 font-mono text-xs font-medium text-slate-300 transition-colors hover:border-white/20 hover:text-white"
+            >
+              {tool}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
