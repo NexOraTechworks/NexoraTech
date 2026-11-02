@@ -99,7 +99,7 @@ export function Projects() {
               <ProjectCard
                 onView={() => handleOpen(data)}
                 key={data.id}
-                image={`${data.project_image}`}
+                image={`${process.env.NEXT_PUBLIC_BACKEND_URL}${data.project_image}`}                
                 title={data.project_name}
                 tools={data.tech_stack}
                 description={data.short_description}
