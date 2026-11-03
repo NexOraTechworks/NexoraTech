@@ -8,12 +8,14 @@ import { PopUp } from "@/app/components/PopUp";
 import { SquarePen } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const MAX_IMAGE_SIZE = 2 * 1024 * 1024;
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
 const ALLOWED_IMAGE_TYPES = [
     "image/png",
     "image/jpeg",
+    "image/jpg",
     "image/webp",
+    "image/gif",
 ];
 
 const DEFAULT_VALUES = {
@@ -73,17 +75,17 @@ export default function Page() {
     };
 
     const imageRegistration = register("project_image", {
-        required: "Please upload a project image",
+
 
         validate: {
             fileType: (files) => {
                 const file = files?.[0];
 
-                if (!file) return "Please upload an image";
+                if (!file) return true;
 
                 return (
                     ALLOWED_IMAGE_TYPES.includes(file.type) ||
-                    "Only PNG, JPG, and WEBP images are allowed"
+                    "Only PNG, JPG, WEBP, and GIF images are allowed"
                 );
             },
 
@@ -93,7 +95,7 @@ export default function Page() {
                 return (
                     !file ||
                     file.size <= MAX_IMAGE_SIZE ||
-                    "Image must be smaller than 2 MB"
+                    "Image must be smaller than 5 MB"
                 );
             },
         },
@@ -160,7 +162,9 @@ export default function Page() {
             )
         );
 
-        formData.append("project_image", data.project_image[0]);
+        if (data.project_image?.[0]) {
+            formData.append("project_image", data.project_image[0]);
+        }
 
         try {
             await axios.post("/api/auth/projects", formData);
@@ -349,7 +353,7 @@ export default function Page() {
                                     </span>
 
                                     <span className="mt-1 text-xs">
-                                        PNG, JPG, WEBP (Max 2 MB)
+                                        PNG, JPG, WEBP, GIF (Max 5 MB)
                                     </span>
                                 </div>
                             )}
@@ -357,7 +361,7 @@ export default function Page() {
                             <input
                                 id="project_image"
                                 type="file"
-                                accept="image/png,image/jpeg,image/webp"
+                                accept="image/png,image/jpeg,image/webp,image/gif"
                                 className="hidden"
                                 {...imageRegistration}
                                 onChange={handleImageChange}

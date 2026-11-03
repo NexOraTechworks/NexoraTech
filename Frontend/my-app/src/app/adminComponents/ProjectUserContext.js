@@ -87,7 +87,7 @@ export function ProjectUserProvider({ children }) {
 
             setProjects((prevProjects) =>
                 prevProjects.filter(
-                    (project) => project.id !== id
+                    (project) => (project.id ?? project._id) !== id
                 )
             );
 

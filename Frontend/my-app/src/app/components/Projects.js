@@ -98,8 +98,15 @@ export function Projects() {
             projects.map((data) => (
               <ProjectCard
                 onView={() => handleOpen(data)}
-                key={data.id}
-                image={`${process.env.NEXT_PUBLIC_BACKEND_URL}${data.project_image}`}                
+                key={data.id ?? data._id}
+                image={
+                  data.project_image?.startsWith("http://") ||
+                  data.project_image?.startsWith("https://")
+                    ? data.project_image
+                    : data.project_image
+                    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${data.project_image}`
+                    : undefined
+                }                
                 title={data.project_name}
                 tools={data.tech_stack}
                 description={data.short_description}

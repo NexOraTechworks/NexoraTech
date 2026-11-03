@@ -72,7 +72,7 @@ export default function ProjectList() {
                         ) : (
                             projects.map((project) => (
                                 <tr
-                                    key={project.id}
+                                    key={project.id ?? project._id}
                                     className="border-b border-[#1A2A48]/60"
                                 >
                                     <td className="w-1/2 px-3 py-4 text-left text-xs font-medium tracking-wider sm:px-5">
@@ -80,7 +80,9 @@ export default function ProjectList() {
                                     </td>
 
                                     <td className="w-1/2 px-3 py-4 text-right text-xs font-medium tracking-wider capitalize sm:px-5">
-                                        {project.tech_stack}
+                                        {Array.isArray(project.tech_stack)
+                                            ? project.tech_stack.join(", ")
+                                            : project.tech_stack}
                                     </td>
                                 </tr>
                             ))

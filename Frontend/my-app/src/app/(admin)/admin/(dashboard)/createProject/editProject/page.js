@@ -73,7 +73,7 @@ export default function ProjectsPage() {
                             ) : (
                                 projects.map((project) => (
                                     <tr
-                                        key={project.id}
+                                        key={project.id ?? project._id}
                                         className="border-b border-[#1A2A48]/60 text-gray-300"
                                     >
                                         <td className="wrap-break-word px-3 py-4 text-xs font-medium tracking-wider sm:px-5">
@@ -99,7 +99,7 @@ export default function ProjectsPage() {
                                                     type="button"
                                                     className="flex items-center gap-1.5 text-xs text-red-400 transition hover:text-red-300"
                                                     aria-label={`Delete ${project.project_name}`}
-                                                    onClick={()=>{deleteProjects(project.id)}}
+                                                    onClick={()=>{deleteProjects(project.id ?? project._id)}}
                                                 >
                                                     Delete
                                                     <Trash size={15} />
