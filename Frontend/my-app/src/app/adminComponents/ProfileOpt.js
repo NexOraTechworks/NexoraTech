@@ -37,12 +37,7 @@ export function ProfileOpt({ username }) {
     setToggle(false);
 
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/logout`,
-        {},
-        { withCredentials: true }
-      );
-
+   await axios.post("/api/auth/logout");
       // Keep loader visible during navigation
       router.replace("/admin/login");
 
