@@ -106,7 +106,7 @@ const handleSubmit = async (e) => {
 
               <Link href="/" className="flex items-center gap-2">
                 <Terminal size={23} className="text-emerald-400" />
-                <span className="text-lg font-semibold  text-white">
+                <span className="text-lg font-semibold text-charcoal  dark:text-white">
                   Nexora<span className="text-emerald-400">.</span>
                 </span>
               </Link>
@@ -122,7 +122,7 @@ const handleSubmit = async (e) => {
                 </span>
               </div>
 
-              <h2 className="text-3xl font-semibold tracking-tight">
+              <h2 className="text-3xl dark:text-white text-charcoal font-semibold tracking-tight">
                 Sign in your account
               </h2>
 

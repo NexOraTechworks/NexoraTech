@@ -81,7 +81,7 @@ export function Contact() {
         >
             <div className="glass-bento shadow rounded-3xl font-mon p-8">
                 <div className="max-w-2xl mb-5">
-                    <span className="text-emerald-light font-bold tracking-widest uppercase text-xs mb-3 block">
+                    <span className="text-violet font-bold tracking-widest uppercase text-xs mb-3 block">
                         // Inquiries
                     </span>
 

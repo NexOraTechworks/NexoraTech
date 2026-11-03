@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="bg-white text-white transition-colors duration-500 dark:bg-onyx">
+      <body className="bg-violet/10 text-white transition-colors duration-500 dark:bg-onyx">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

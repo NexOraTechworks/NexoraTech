@@ -1,8 +1,8 @@
 'use client';
 
 import Loader from '@/app/components/Loader';
-import { useProjectUsers } from '../../adminComponents/ProjectUserContext';
-import UserList from '../../adminComponents/UserList';
+import { useProjectUsers } from '@/app/adminComponents/ProjectUserContext';
+import UserList from '@/app/adminComponents/UserList';
 import ProjectList from '@/app/adminComponents/ProjectList';
 import SystemInfo from '@/app/adminComponents/SystemInfo';
 

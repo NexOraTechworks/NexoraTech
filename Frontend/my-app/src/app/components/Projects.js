@@ -75,7 +75,7 @@ export function Projects() {
             // Selected Work
           </span>
 
-          <h1 className="font-syne text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <h1 className="font-syne text-3xl font-semibold tracking-tight text-charcoal dark:text-white sm:text-4xl">
             Projects that reflect{" "}
             <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
               our expertise.

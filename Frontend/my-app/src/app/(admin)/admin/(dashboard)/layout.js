@@ -1,7 +1,7 @@
 'use client';
 import { useState } from "react";
-import { AdminNav } from "../../adminComponents/AdminNav";
-import { Panel } from "../../adminComponents/Panel";
+import { AdminNav } from "@/app/adminComponents/AdminNav";
+import { Panel } from "@/app/adminComponents/Panel";
 import { AuthProvider, ProjectUserProvider } from "@/app/adminComponents/ProjectUserContext";
 
 export default function AdminLayout({ children }) {

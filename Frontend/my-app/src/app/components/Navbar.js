@@ -13,22 +13,23 @@ export function Navbar() {
             </a>
             <div className=" hidden md:flex justify-between gap-4    items-center space-x-1 font-mon text-xs   " >
                 {/* <a href="" className="  text-muted hover:text-slate-800  dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl " >Overview</a> */}
-                <a href="#projects" className="  text-muted   dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-emerald  " >Projects</a>
-                <a href="#stack" className="  text-muted  dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-emerald " >Stack</a>
-                <a href="#contact" className="  text-muted   dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl transition-colors hover:text-emerald " >Contact</a>
+                <a href="#projects" className=" dark:text-muted  text-black  dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-emerald  " >Projects</a>
+                <a href="#stack" className=" dark:text-muted text-black dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl hover:text-emerald " >Stack</a>
+                <a href="#contact" className="dark:text-muted  text-black   dark:hover:bg-white/5 py-1.5 px-3.5 rounded-2xl transition-colors hover:text-emerald " >Contact</a>
 
             </div>
             <div className=" flex items-center gap-1.5 ">
                 <ThemeToggle />
                 <a
                     href="#contact"
-                    className="px-4 py-1.5 rounded-full dark:bg-white/10 bg-light
+                    className="px-4 py-1.5 rounded-full dark:bg-white/10 bg-violet/
                            hover:bg-white/20 border border-graphite shadow
                             dark:border-white/10 text-xs font-mono font-medium
-                          dark:text-white text-charcoal transition-all duration-500
+                          dark:text-white transition-all duration-500
+                          bg-violet
                               flex items-center space-x-2 gap-2"
                 >
-                    <span className="w-2 h-2 rounded-full bg-emerald animate-pulse" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-light  animate-pulse" />
                     Let's talk
                 </a>
             </div>
