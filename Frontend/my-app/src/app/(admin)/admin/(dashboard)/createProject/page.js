@@ -1,11 +1,13 @@
+
 'use client';
+
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
-import { CloudUpload } from "lucide-react";
+import { CloudUpload, SquarePen } from "lucide-react";
 import { ErrorMessage } from "@/app/adminComponents/ErrorMessage";
+import TechStackInput from "@/app/adminComponents/TechStackInput";
 import { PopUp } from "@/app/components/PopUp";
-import { SquarePen } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
@@ -23,13 +25,15 @@ const DEFAULT_VALUES = {
     short_description: "",
     additional_details: "",
     project_image: "",
-    tech_stack: "",
+    tech_stack: [],
 };
 
 export default function Page() {
-    const router = useRouter()
+    const router = useRouter();
+
     const {
         register,
+        control,
         handleSubmit,
         reset,
         setValue,
@@ -39,6 +43,7 @@ export default function Page() {
     });
 
     const [imagePreview, setImagePreview] = useState("");
+
     const [popup, setPopup] = useState({
         show: false,
         message: "",
@@ -74,9 +79,8 @@ export default function Page() {
         });
     };
 
+    // Image registration and validation.
     const imageRegistration = register("project_image", {
-
-
         validate: {
             fileType: (files) => {
                 const file = files?.[0];
@@ -131,24 +135,24 @@ export default function Page() {
         setImagePreview(URL.createObjectURL(file));
     };
 
+    // Submit project.
     const submitProject = async (data) => {
         const formData = new FormData();
 
-        formData.append("project_name", data.project_name.trim());
+        formData.append(
+            "project_name",
+            data.project_name.trim()
+        );
 
         formData.append(
             "short_description",
             data.short_description.trim()
         );
 
-        const technologies = data.tech_stack
-            .split(",")
-            .map((technology) => technology.trim())
-            .filter(Boolean);
-
+        // Technologies are already stored as an array.
         formData.append(
             "tech_stack",
-            JSON.stringify(technologies)
+            JSON.stringify(data.tech_stack)
         );
 
         formData.append(
@@ -163,23 +167,26 @@ export default function Page() {
         );
 
         if (data.project_image?.[0]) {
-            formData.append("project_image", data.project_image[0]);
+            formData.append(
+                "project_image",
+                data.project_image[0]
+            );
         }
 
         try {
             await axios.post("/api/auth/projects", formData);
-        
+
             reset(DEFAULT_VALUES);
             setImagePreview("");
-        
+
             showPopup("Project added successfully!");
-        
+
         } catch (error) {
             const message =
                 error.response?.data?.message ||
                 error.message ||
                 "Something went wrong. Please try again.";
-        
+
             showPopup(message);
         }
     };
@@ -193,35 +200,44 @@ export default function Page() {
     const labelClass =
         "block tracking-tight font-mono text-xs mb-3 text-white";
 
-
     return (
         <section className="mt-11">
-            <div className=" flex justify-between">
+
+            <div className="flex justify-between">
+
                 <h2 className="mb-4 text-3xl">
                     Add New Project
                 </h2>
+
                 <div>
-                <button
-                    type="button"
-                    onClick={() => {
-                        // Connect your edit functionality here.
-                        router.replace("/admin/createProject/editProject")
-                    }}
-                    className="flex items-center p-2.5 rounded-lg gap-1.5 text-xs bg-[#6A5AF7] hover:bg-violet-700"
+                    <button
+                        type="button"
+                        onClick={() => {
+                            router.replace(
+                                "/admin/createProject/editProject"
+                            );
+                        }}
+                        className="flex items-center p-2.5 rounded-lg gap-1.5 text-xs bg-[#6A5AF7] hover:bg-violet-700"
                     >
-                    Edit Projects
-                    <SquarePen size={16} />
-                </button>
-                    </div>
+                        Edit Projects
+                        <SquarePen size={16} />
+                    </button>
+                </div>
+
             </div>
 
             <form onSubmit={handleSubmit(submitProject)}>
+
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5">
 
                     {/* Project information */}
                     <div className="bg-[#051121] w-full max-w-3xl rounded-lg py-3 px-4">
 
-                        <label htmlFor="project_name" className={labelClass}>
+                        {/* Project title */}
+                        <label
+                            htmlFor="project_name"
+                            className={labelClass}
+                        >
                             Project title
                         </label>
 
@@ -246,7 +262,11 @@ export default function Page() {
                             )}
                         </div>
 
-                        <label htmlFor="short_description" className={labelClass}>
+                        {/* Short description */}
+                        <label
+                            htmlFor="short_description"
+                            className={labelClass}
+                        >
                             Project short description
                         </label>
 
@@ -272,7 +292,11 @@ export default function Page() {
                             )}
                         </div>
 
-                        <label htmlFor="additional_details" className={labelClass}>
+                        {/* Additional details */}
+                        <label
+                            htmlFor="additional_details"
+                            className={labelClass}
+                        >
                             Additional details (optional)
                         </label>
 
@@ -293,23 +317,25 @@ export default function Page() {
                             )}
                         </div>
 
-                        <label htmlFor="tech_stack" className={labelClass}>
+                        {/* Technologies */}
+                        <label className={labelClass}>
                             Technologies
                         </label>
 
-                        <input
-                            id="tech_stack"
-                            type="text"
-                            placeholder="JavaScript, React, MongoDB..."
-                            className={inputClass}
-                            {...register("tech_stack", {
-                                required: "Technologies are required",
+                        <Controller
+                            name="tech_stack"
+                            control={control}
+                            rules={{
                                 validate: (value) =>
-                                    value
-                                        .split(",")
-                                        .some((technology) => technology.trim()) ||
+                                    value.length > 0 ||
                                     "Enter at least one technology",
-                            })}
+                            }}
+                            render={({ field }) => (
+                                <TechStackInput
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
                         />
 
                         <div className="min-h-5">
@@ -319,6 +345,7 @@ export default function Page() {
                                 />
                             )}
                         </div>
+
                     </div>
 
                     {/* Project image and submit */}
@@ -328,8 +355,11 @@ export default function Page() {
                             htmlFor="project_image"
                             className="flex min-h-40 cursor-pointer flex-col items-center justify-center rounded-lg border border-white/10 bg-[#051121] text-gray-400 hover:bg-[#0F1458]/30 overflow-hidden"
                         >
+
                             {imagePreview ? (
+
                                 <div className="flex flex-col items-center gap-2 py-2">
+
                                     <img
                                         src={imagePreview}
                                         alt="Selected project preview"
@@ -343,9 +373,13 @@ export default function Page() {
                                     <span className="text-xs text-gray-400">
                                         Click to change image
                                     </span>
+
                                 </div>
+
                             ) : (
+
                                 <div className="flex flex-col items-center py-4">
+
                                     <CloudUpload size={36} />
 
                                     <span className="text-sm mt-2">
@@ -355,7 +389,9 @@ export default function Page() {
                                     <span className="mt-1 text-xs">
                                         PNG, JPG, WEBP, GIF (Max 5 MB)
                                     </span>
+
                                 </div>
+
                             )}
 
                             <input
@@ -366,6 +402,7 @@ export default function Page() {
                                 {...imageRegistration}
                                 onChange={handleImageChange}
                             />
+
                         </label>
 
                         <div className="min-h-5">
@@ -376,23 +413,32 @@ export default function Page() {
                             )}
                         </div>
 
+                        {/* Submit button */}
                         <div className="flex-1 mb-2.5 flex justify-end items-end">
+
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
                                 className="bg-[#6A5AF7] rounded-lg font-medium text-xs md:text-sm mt-4 px-6 py-3 text-white hover:bg-violet-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                {isSubmitting ? "Submitting..." : "Submit"}
+                                {isSubmitting
+                                    ? "Submitting..."
+                                    : "Submit"}
                             </button>
+
                         </div>
+
                     </div>
+
                 </div>
 
                 <PopUp
                     show={popup.show}
                     text={popup.message}
                 />
+
             </form>
+
         </section>
     );
 }
