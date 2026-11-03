@@ -22,7 +22,7 @@ export function Card({
   return (
     <div className="h-full min-w-0">
       <div
-        className={`group relative flex h-full max-w-lg  flex-col  overflow-hidden rounded-2xl border border-white/[0.08]  border-l-[1px] bg-gradient-to-br from-[#0F1423]/95 via-[#0A0D17]/95 ${borderAccent} to-[#080B12] py-4 px-6 backdrop-blur-xl transition-all duration-300 ${hoverGlow}`}
+        className={`group relative flex h-full max-w-lg  flex-col  overflow-hidden rounded-2xl  border-white/[0.08] bg-violet/15 shadow-lg  dark:bg-gradient-to-br from-[#0F1423]/95 via-[#0A0D17]/95 ${borderAccent} to-[#080B12] py-4 px-6 backdrop-blur-xl transition-all duration-300 ${hoverGlow}`}
       >
         {/* Top: Icon + Title & Description */}
         <div className="flex items-start gap-4">
@@ -36,7 +36,7 @@ export function Card({
 
           {/* Title & Description */}
           <div className="min-w-0 flex-1 pt-0.5">
-            <h3 className="font-syne text-base font-semibold tracking-tight text-white transition-colors duration-200">
+            <h3 className="font-syne text-base font-semibold tracking-tight text-charcoal dark:text-white transition-colors duration-200">
               {title}
             </h3>
             {description && (
@@ -52,7 +52,7 @@ export function Card({
           {pillList.map((tool, index) => (
             <span
               key={index}
-              className="rounded-full border border-white/[0.08] bg-[#111625] px-2 py-1.5 font-mono text-xs font-medium text-slate-300 transition-colors hover:border-white/20 hover:text-white"
+              className="rounded-full border border-white/[0.08] bg-violet/50   dark:bg-[#111625] px-2 py-1.5 font-mono text-xs font-medium text-white dark:text-slate-300 transition-colors hover:border-white/20 hover:text-white"
             >
               {tool}
             </span>

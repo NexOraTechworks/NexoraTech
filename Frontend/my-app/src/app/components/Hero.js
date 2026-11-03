@@ -6,7 +6,7 @@ import { TypingTexts } from "./TypingTexts";
 export function Hero() {
     
     return (
-        <main id="hero" className=" min-h-[92vh]  flex flex-col items-center justify-center text-center  pt-20  " >
+        <main id="hero" className=" min-h-[92vh]   flex flex-col items-center justify-center text-center  pt-20  " >
             <LiveClock />
             <div className=" flex flex-col justify-center px-2 items-center " >
 

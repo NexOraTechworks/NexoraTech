@@ -38,7 +38,7 @@ export function Stack(){
       
         <div>
         <div className=" mb-5 " >
-                    <span className="text-emerald-light font-bold tracking-widest uppercase text-xs mb-3 block " >
+                    <span className="text-violet font-bold tracking-widest uppercase text-xs mb-3 block " >
                     // Technical Depth
                     </span>
                     <h2 className=" dark:text-white text-charcoal font-bold font-syne leading-12 text-2xl md:text-4xl tracking-wide" >

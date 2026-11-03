@@ -41,7 +41,7 @@ export function TypingTexts(){
     },[text,deleting,index])
     
     return(
-        <span className=" text-emerald-400 uppercase text-sm md:text-xl "> 
+        <span className=" text-violet uppercase text-sm md:text-xl "> 
             {text}
         </span>
     )

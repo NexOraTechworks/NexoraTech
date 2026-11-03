@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { SquarePen } from "lucide-react";
 import StatusToggle from "@/app/adminComponents/StatusToggle";
-import { ErrorMessage } from "../../../adminComponents/ErrorMessage";
+import { ErrorMessage } from "@/app/adminComponents/ErrorMessage";
 import { PopUp } from "@/app/components/PopUp";
 import { useRouter } from "next/navigation";
 

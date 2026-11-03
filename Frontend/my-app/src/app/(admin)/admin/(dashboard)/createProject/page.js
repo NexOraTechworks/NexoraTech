@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { CloudUpload } from "lucide-react";
-import { ErrorMessage } from "../../../adminComponents/ErrorMessage";
+import { ErrorMessage } from "@/app/adminComponents/ErrorMessage";
 import { PopUp } from "@/app/components/PopUp";
 import { SquarePen } from "lucide-react";
 import { useRouter } from "next/navigation";
