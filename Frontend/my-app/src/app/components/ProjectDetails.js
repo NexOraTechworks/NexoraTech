@@ -46,7 +46,7 @@ export function ProjectDetails({ project, onClose, isOpen }) {
             <div className="flex flex-1 mt-2 items-end">
               <button
                 onClick={onClose}
-                className="rounded-2xl bg-white/5 px-6 py-2 text-sm font-mon hover:bg-white/10"
+                className="rounded-2xl bg-black hover:bg-slate-800  dark:bg-white/5 px-6 py-2 text-sm font-mon  dark:hover:bg-white/10"
               >
                 Close
               </button>
